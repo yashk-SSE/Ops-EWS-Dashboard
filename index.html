@@ -22,7 +22,7 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 .upd{font-size:9px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;white-space:nowrap}
 .rbtn{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:#fff;padding:5px 10px;border-radius:7px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;white-space:nowrap}
 .rbtn:hover{background:rgba(255,255,255,.16);text-decoration:none}
-.csel{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);color:#fff;padding:5px 8px;border-radius:7px;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;max-width:160px}
+.csel{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);color:#fff;padding:5px 8px;border-radius:7px;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;max-width:150px}
 .csel option{color:#111}
 .mob-nav{display:none;background:var(--sur);border-bottom:1px solid var(--bd);padding:0 8px;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
 .mob-nav::-webkit-scrollbar{display:none}
@@ -37,11 +37,11 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 .side-foot{padding:14px 12px;font-size:10px;color:var(--t3);line-height:1.5;border-top:1px solid var(--bd);margin-top:10px}
 .main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .panel{display:none;padding:16px;max-width:1280px}.panel.active{display:block}
+.crumb{font-size:11px;color:var(--t2);margin-bottom:4px}.crumb a{cursor:pointer}.crumb .cur{color:var(--tx);font-weight:600}
 .ptitle{font-size:16px;font-weight:600;margin-bottom:2px}
 .psub{font-size:11px;color:var(--t2);margin-bottom:14px}
 .stitle{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#374151;margin:16px 0 8px;padding:2px 0;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .stitle .hint{font-weight:400;text-transform:none;letter-spacing:0;color:var(--t3);font-size:10px}
-/* Dark "do first" strip (the Referral FY tracker's style) */
 .fy{background:#111;color:#fff;border-radius:var(--rl);padding:13px 16px;margin-bottom:12px}
 .fy-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .fy-lbl{font-size:9px;font-weight:600;color:var(--so);letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px}
@@ -50,7 +50,6 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 .fy-stats{display:flex;gap:16px;flex-shrink:0}
 .fys-v{font-size:18px;font-weight:600;font-family:'DM Mono',monospace;color:var(--so)}
 .fys-l{font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px}
-/* Action cards */
 .agrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:6px}
 .ac{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
 .ac-hd{padding:7px 12px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#fff}
@@ -66,17 +65,11 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 .c-push .ac-hd{background:#d97706}.c-push .ac-val{color:#b45309}.c-push{border-top:3px solid #d97706}
 .c-reply .ac-hd{background:var(--bl)}.c-reply .ac-val{color:var(--bl)}.c-reply{border-top:3px solid var(--bl)}
 .c-harsh .ac-hd{background:#7f1d1d}.c-harsh .ac-val{color:#7f1d1d}.c-harsh{border-top:3px solid #7f1d1d}
-.vsy{font-size:11px;color:var(--t2);margin:6px 0 2px}
 .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
 .mc{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);padding:10px}
 .mc-lbl{font-size:9px;color:var(--t3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
 .mc-val{font-size:20px;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:-1px;margin-bottom:2px}
 .mc-sub{font-size:10px;color:var(--t3)}
-.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600;white-space:nowrap}
-.b-call{background:#fde2e1;color:#a50e0e}.b-both{background:#c5221f;color:#fff}.b-push{background:var(--aml);color:var(--am)}
-.b-none{background:var(--s2);color:var(--t3)}.b-harsh{background:#7f1d1d;color:#fff}.b-tag{background:var(--s2);color:var(--t2)}
-.b-age7{background:var(--rdl);color:var(--rd)}.b-age2{background:var(--aml);color:var(--am)}.b-age1{background:#fff7ed;color:#c2410c}.b-age0{background:var(--gnl);color:var(--gn)}
-.b-nfc{background:var(--pul);color:var(--pu)}
 .tw{overflow-x:auto;border:1px solid var(--bd);border-radius:var(--rl);background:var(--sur);margin-bottom:12px;-webkit-overflow-scrolling:touch}
 .tw.freeze{max-height:72vh;overflow:auto}
 .tw.freeze thead th{position:sticky;top:0;z-index:5}
@@ -87,13 +80,13 @@ td{padding:6px 8px;border-bottom:1px solid var(--bd);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tbody tr{transition:background .1s ease}tbody tr:hover{background:var(--s2)}
 tr.india td{font-weight:700;background:#fafaf7}
+tr.grp td{font-weight:700;background:#eef2ff;border-top:2px solid #c7d2fe}
 tr.click{cursor:pointer}
-.mono,td.num{font-family:'DM Mono',monospace}
+td.num{font-family:'DM Mono',monospace}
 td.hr{background:#fee2e2;color:#991b1b;font-weight:600}td.ha{background:#fef3c7;color:#92400e;font-weight:600}
 td.hd{background:#7f1d1d;color:#fff;font-weight:600}td.hp{background:var(--pul);color:var(--pu);font-weight:600}
 td.z{color:var(--t3)}
 td.do{min-width:260px;font-size:11.5px;line-height:1.4}
-#t-list td{white-space:nowrap}#t-list td.wrap{white-space:normal;min-width:150px}
 th.sortable{cursor:pointer;user-select:none}th.sortable:hover{background:var(--s2)}
 th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:' \2193';color:var(--bl)}
 .card{background:var(--sur);border:1px solid var(--bd);border-radius:var(--rl);padding:12px 14px;margin-bottom:12px}
@@ -103,11 +96,6 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 .ins.crit{border-left-color:#ef4444;background:#fef2f2}.ins.warn{border-left-color:#f59e0b;background:#fffbeb}.ins.info{border-left-color:#8b5cf6;background:#faf5ff}
 .ins-title{font-size:12px;font-weight:600;line-height:1.35}
 .ins-body{font-size:11px;color:var(--t2);line-height:1.55;margin-top:2px}
-.fbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
-.fbar label{font-size:10px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.4px;display:flex;flex-direction:column;gap:3px}
-.fbar select,.fbar input{font-size:12px;padding:5px 8px;border-radius:var(--r);border:1px solid var(--bd2);background:var(--sur);color:var(--tx);font-family:'DM Sans',sans-serif}
-.fbar .grow{flex:1}
-.count{font-size:12px;color:var(--t2);font-weight:600}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;color:var(--t2);margin:4px 0 10px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 .cwrap{position:relative;width:100%;height:280px}
@@ -121,22 +109,54 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 .note p{margin-bottom:8px}.note b{color:var(--tx)}
 .why-row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--bd);font-size:12px}
 .why-row:last-child{border:none}.why-row.sub{padding-left:14px;color:var(--t2)}
-.why-row .mono{font-weight:600}
+.why-row .mono{font-weight:600;font-family:'DM Mono',monospace}
 .empty{padding:24px;text-align:center;color:var(--t3);font-size:12px}
-@media(max-width:900px){.agrid{grid-template-columns:repeat(2,1fr)}.mgrid{grid-template-columns:repeat(2,1fr)}.twocol{grid-template-columns:1fr}}
+/* Customer list */
+.seg{display:flex;gap:4px;background:var(--s2);border-radius:9px;padding:3px;flex-wrap:wrap;margin-bottom:8px}
+.seg button{border:none;background:transparent;border-radius:7px;padding:6px 11px;font-size:12px;font-weight:500;color:var(--t2);cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.seg button .n{font-family:'DM Mono',monospace;font-size:11px;color:var(--t3)}
+.seg button.on{background:var(--sur);color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.12);font-weight:600}
+.seg button.on .n{color:var(--bl)}
+.lbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.lbar select,.lbar input{font-size:12px;padding:6px 9px;border-radius:8px;border:1px solid var(--bd2);background:var(--sur);color:var(--tx);font-family:'DM Sans',sans-serif}
+.lbar input{flex:1;min-width:140px}
+.lsec{background:var(--sur);border:1px solid var(--bd);border-radius:var(--rl);margin-bottom:12px;overflow:hidden}
+.lsec-hd{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--bd)}
+.lsec-hd .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.lsec-hd .t{font-size:13px;font-weight:600}.lsec-hd .n{font-family:'DM Mono',monospace;font-size:12px;color:var(--t2)}
+.lsec-hd .who{margin-left:auto;font-size:11px;color:var(--t2)}
+.lrow{display:grid;grid-template-columns:minmax(170px,1.15fr) minmax(150px,1.2fr) minmax(130px,.9fr) minmax(120px,.8fr) minmax(170px,1.1fr);gap:14px;padding:10px 14px;border-bottom:1px solid var(--bd);align-items:center;border-left:3px solid transparent}
+.lrow:last-child{border-bottom:none}.lrow:hover{background:#fafaf7}
+.lrow.a-call{border-left-color:#c5221f}.lrow.a-push{border-left-color:#d97706}.lrow.a-reply{border-left-color:var(--bl)}.lrow.a-nfc{border-left-color:#8b5cf6}
+.lhd{display:grid;grid-template-columns:minmax(170px,1.15fr) minmax(150px,1.2fr) minmax(130px,.9fr) minmax(120px,.8fr) minmax(170px,1.1fr);gap:14px;padding:7px 14px 7px 17px;background:#f8f8f5;border-bottom:1px solid var(--bd);font-size:9.5px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
+.pid{font-family:'DM Mono',monospace;font-weight:500;font-size:12.5px;color:var(--tx)}
+.sub{display:block;font-size:11px;color:var(--t2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:10.5px;padding:2px 7px;border-radius:6px;background:var(--s2);color:var(--t2);white-space:nowrap;font-weight:500}
+.tag.harsh{background:#7f1d1d;color:#fff}.tag.both{background:#fde2e1;color:#a50e0e}.tag.nfc{background:var(--pul);color:var(--pu)}
+.when{font-size:12px;color:var(--tx)}
+.wait{display:inline-block;margin-top:3px;font-size:10.5px;font-weight:600;padding:1px 7px;border-radius:10px}
+.w0{background:var(--gnl);color:var(--gn)}.w1{background:#fff7ed;color:#c2410c}.w2{background:var(--aml);color:var(--am)}.w3{background:var(--rdl);color:var(--rd)}
+.muted{color:var(--t3)}
+.k{display:none;color:var(--t3);font-size:11px}
+.more{display:block;width:100%;border:none;border-top:1px solid var(--bd);background:#fafaf7;padding:9px;font-size:12px;font-weight:600;color:var(--bl);cursor:pointer;font-family:'DM Sans',sans-serif}
+@media(max-width:900px){.agrid{grid-template-columns:repeat(2,1fr)}.mgrid{grid-template-columns:repeat(2,1fr)}.twocol{grid-template-columns:1fr}
+  .lhd{display:none}.lrow{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px}.lrow .c-id{order:1}.lrow .c-wr{order:2}.lrow .c-why{grid-column:1 / -1;order:3}
+  .lrow .c-rep{order:4}.lrow .c-stage{order:5}.k{display:inline}}
 @media(max-width:700px){
   .sidebar{display:none}.mob-nav{display:block}
   .layout{height:calc(100vh - 48px - 38px)}
   .panel{padding:12px 16px}.ptitle{font-size:14px}
   .top{padding:0 10px}.logo .sub,.logo .sep,.upd.hide-s,#sheet-btn-txt{display:none}
-  .top-r{gap:6px}.csel{max-width:130px}
+  .top-r{gap:5px}.csel{max-width:105px}
   .fy-stats{width:100%;justify-content:space-between}
   .ac-val{font-size:26px}
   .tw table td:first-child,.tw table th:first-child{position:sticky;left:0;z-index:2;background:var(--sur);box-shadow:2px 0 4px rgba(0,0,0,.06);max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .tw table th:first-child{background:#eef2ff;z-index:6}
-  tr.india td:first-child{background:#fafaf7}
+  tr.india td:first-child{background:#fafaf7}tr.grp td:first-child{background:#eef2ff}
+  .lsec-hd .who{display:none}
 }
-@media(max-width:480px){.logo .nm,.fy-pill{display:none}}
+@media(max-width:480px){.logo .nm,.fy-pill,.logo img{display:none}}
 @media(max-width:420px){.agrid{grid-template-columns:1fr 1fr}.ac-hd{font-size:9px;padding:6px 8px}.ac-bd,.ac-ft{padding:8px}.ac-val{font-size:22px}}
 </style>
 </head>
@@ -144,7 +164,8 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 <div class="top">
   <div class="logo"><img src="logo.jpg" alt="SolarSquare"><span class="nm">SolarSquare</span><span class="sep">|</span><span class="sub">Ops EWS</span></div>
   <div class="top-r">
-    <select class="csel" id="cluster-sel" title="Cluster" onchange="setCluster(this.value)"><option>All India</option></select>
+    <select class="csel" id="state-sel" title="State" onchange="setState(this.value)"></select>
+    <select class="csel" id="cluster-sel" title="Cluster" onchange="setCluster(this.value)"></select>
     <div class="fy-pill" id="saved-pill">Data: &ndash;</div>
     <div class="upd hide-s" id="dump-lbl">&ndash;</div>
     <a class="rbtn" id="sheet-btn" href="#" target="_blank" rel="noopener" title="Opens the Google Sheet (SolarSquare login, people it is shared with)">&#8599;<span id="sheet-btn-txt"> Open the sheet</span></a>
@@ -153,9 +174,9 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 </div>
 <div class="mob-nav" id="mob-nav">
   <span class="mob-tab active" data-v="board" onclick="sw('board')">Today</span>
-  <span class="mob-tab" data-v="clusters" onclick="sw('clusters')">Clusters</span>
-  <span class="mob-tab" data-v="pending" onclick="sw('pending')">Pending chats</span>
   <span class="mob-tab" data-v="list" onclick="sw('list')">Customer list</span>
+  <span class="mob-tab" data-v="clusters" onclick="sw('clusters')">States &amp; clusters</span>
+  <span class="mob-tab" data-v="pending" onclick="sw('pending')">Pending chats</span>
   <span class="mob-tab" data-v="trend" onclick="sw('trend')">Trend</span>
   <span class="mob-tab" data-v="about" onclick="sw('about')">How it works</span>
 </div>
@@ -163,10 +184,10 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 <nav class="sidebar">
   <div class="sh">Today</div>
   <div class="ni active" data-v="board" onclick="sw('board')">&#11041; What to do today</div>
-  <div class="ni" data-v="clusters" onclick="sw('clusters')">&#9678; Clusters</div>
+  <div class="ni" data-v="list" onclick="sw('list')">&#8862; Customer list<span class="cnt" id="nav-cnt"></span></div>
+  <div class="ni" data-v="clusters" onclick="sw('clusters')">&#9678; States &amp; clusters</div>
   <div class="sh">Freshchat</div>
   <div class="ni" data-v="pending" onclick="sw('pending')">&#9672; Pending chats</div>
-  <div class="ni" data-v="list" onclick="sw('list')">&#8862; Customer list<span class="cnt" id="nav-cnt"></span></div>
   <div class="sh">Over time</div>
   <div class="ni" data-v="trend" onclick="sw('trend')">&#9719; Trend</div>
   <div class="sh">About</div>
@@ -177,9 +198,9 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
   <div class="loading" id="loading"><div class="spin"></div>Loading the latest data&hellip;</div>
   <div id="app" style="display:none">
     <section class="panel active" id="p-board"></section>
+    <section class="panel" id="p-list"></section>
     <section class="panel" id="p-clusters"></section>
     <section class="panel" id="p-pending"></section>
-    <section class="panel" id="p-list"></section>
     <section class="panel" id="p-trend"></section>
     <section class="panel" id="p-about"></section>
   </div>
@@ -187,21 +208,25 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 </div>
 <script>
 'use strict';
-var ALL = 'All India';
-var S = { d: null, cluster: ALL, view: 'board', charts: {},
-  f: { act: 'All', why: 'All', cell: 'All', age: 'All', show: 'All', q: '' }, sort: {} };
-var CALL = 'Call the customer', BOTH = 'Call + push', PUSH = 'Project stuck - push it';
-var WHY = { harsh: 'Harsh words', wrote: 'Wrote 3+ times in 7 days', installed: 'Installed 45+ days ago', seeking: 'Seeking cancellation', replied: 'Replied, project stuck' };
+var S = { d: null, state: '', cluster: '', view: 'board', charts: {}, sort: {}, more: {},
+  f: { seg: 'all', why: 'All', cell: 'All', wait: 'All', q: '' } };
+var CALL = 'Call the customer', BOTH = 'Call + push', PUSH = 'Project stuck - push it', NOSTATE = 'No state';
+var NUMF = ['Score', 'Open rows', 'Call now', 'Call + push', 'Push stuck', 'Harsh words', 'Wrote 3+ times', 'Waiting > 24 h', 'Pending chats',
+  'Not in Freshchat data', 'Wrote after the dump', 'Call now yesterday', 'Waiting > 24 h yesterday'];
 
 function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function js(v) { return "'" + String(v).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'"; }
 function n(v) { var x = Number(v); return isFinite(x) ? x : 0; }
 function fmt(v) { return n(v).toLocaleString('en-IN'); }
+function sum(rows, k) { return rows.reduce(function (t, r) { return t + n(r[k]); }, 0); }
 var DTF = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false });
 var DF = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short' });
-function dt(iso) { if (!iso) return '&ndash;'; var p = DTF.formatToParts(new Date(iso)), g = function (t) { var x = p.find(function (q) { return q.type === t; }); return x ? x.value : ''; };
-  return g('day') + '-' + g('month').slice(0, 3) + ' ' + g('hour') + ':' + g('minute'); }
-function dOnly(s) { if (!s) return ''; var p = DF.formatToParts(new Date(s + 'T12:00:00+05:30')); return p[0].value + '-' + p[2].value.slice(0, 3); }
-function ago(iso) { if (!iso) return ''; var h = (Date.now() - new Date(iso)) / 3600000; return h < 1 ? 'just now' : h < 24 ? Math.floor(h) + ' h ago' : Math.floor(h / 24) + ' d ago'; }
+function part(p, t) { var x = p.find(function (q) { return q.type === t; }); return x ? x.value : ''; }
+function dt(iso) { if (!iso) return '-'; var p = DTF.formatToParts(new Date(iso)); return part(p, 'day') + '-' + part(p, 'month').slice(0, 3) + ' ' + part(p, 'hour') + ':' + part(p, 'minute'); }
+function dOnly(s) { if (!s) return ''; var p = DF.formatToParts(new Date(s + 'T12:00:00+05:30')); return part(p, 'day') + '-' + part(p, 'month').slice(0, 3); }
+function hrs(iso) { return (Date.now() - new Date(iso)) / 3600000; }
+function ago(iso) { if (!iso) return ''; var h = hrs(iso); return h < 1 ? 'just now' : h < 24 ? Math.floor(h) + ' h ago' : Math.floor(h / 24) + ' d ago'; }
+function span(h) { return h < 1 ? 'under 1 h' : h < 24 ? Math.floor(h) + ' h' : Math.floor(h / 24) + ' d'; }
 
 /* ---------- data ---------- */
 function rowsOf(head, rows) { return rows.map(function (r) { var o = {}; head.forEach(function (h, i) { o[h] = r[i]; }); return o; }); }
@@ -209,39 +234,96 @@ async function load() {
   var r = await fetch('data/ews.json?t=' + Date.now(), { cache: 'no-store' });
   if (!r.ok) throw new Error(r.status === 404 ? 'No data yet. The Ops sheet sends it after its next pull (or run pushDashboard in the script).' : 'Could not load the data (HTTP ' + r.status + ').');
   var d = await r.json();
+  d.states = d.states || {};
   d.A = rowsOf(d.actionHead, d.action);
   d.P = rowsOf(d.projectHead, d.projects);
   d.T = rowsOf(d.trendHead || [], d.trend || []);
+  d.P.forEach(function (p) { p.state = stateOf(p.cl, d); });
+  d.A.forEach(function (r) { r.State = stateOf(r.Level === 'Cluster' ? r.Name : r.Cluster, d); });
   return d;
 }
+function stateOf(cl, d) { return ((d || S.d).states || {})[cl] || NOSTATE; }
+function hasStates() { return Object.keys(S.d.states).length > 0; }
 async function init() {
   document.getElementById('loading').style.display = 'flex';
   document.getElementById('app').style.display = 'none';
-  try {
-    S.d = await load();
-  } catch (e) {
-    document.getElementById('loading').innerHTML = '<div class="err">' + esc(e.message) + '</div>';
-    return;
-  }
+  try { S.d = await load(); }
+  catch (e) { document.getElementById('loading').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; return; }
   var d = S.d;
-  document.getElementById('saved-pill').textContent = 'Data: ' + dt(d.savedAt).replace('&ndash;', '-');
-  document.getElementById('dump-lbl').textContent = 'Freshchat dump up to ' + dt(d.dumpAt).replace('&ndash;', '-');
+  document.getElementById('saved-pill').textContent = 'Data: ' + dt(d.savedAt);
+  document.getElementById('dump-lbl').textContent = 'Freshchat dump up to ' + dt(d.dumpAt);
   var sb = document.getElementById('sheet-btn'); if (d.sheetUrl) sb.href = d.sheetUrl; else sb.style.display = 'none';
-  var sel = document.getElementById('cluster-sel'), cls = clusterRows().map(function (r) { return r.Name; }).sort();
-  sel.innerHTML = [ALL].concat(cls).map(function (c) { return '<option' + (c === S.cluster ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('');
-  if (S.cluster !== ALL && cls.indexOf(S.cluster) === -1) S.cluster = ALL;
   try { var v = localStorage.getItem('ews-view'); if (v && document.getElementById('p-' + v)) S.view = v; } catch (e) { /* storage blocked */ }
+  if (S.state && stateNames().indexOf(S.state) === -1) S.state = '';
+  if (S.cluster && !clusterRows().some(function (r) { return r.Name === S.cluster; })) S.cluster = '';
+  fillPickers();
   document.getElementById('loading').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   renderAll();
   sw(S.view);
 }
 function clusterRows() { return S.d.A.filter(function (r) { return r.Level === 'Cluster'; }); }
-function scopeRow() {
-  var A = S.d.A, r = S.cluster === ALL ? A.find(function (x) { return x.Level === 'India'; }) : A.find(function (x) { return x.Level === 'Cluster' && x.Name === S.cluster; });
-  return r || { Name: S.cluster };
+function stateNames() { var s = {}; clusterRows().forEach(function (r) { s[r.State] = 1; }); return Object.keys(s).sort(function (a, b) { return a === NOSTATE ? 1 : b === NOSTATE ? -1 : a.localeCompare(b); }); }
+function fillPickers() {
+  var ss = document.getElementById('state-sel'), cs = document.getElementById('cluster-sel');
+  ss.style.display = hasStates() ? '' : 'none';
+  ss.innerHTML = '<option value="">All states</option>' + stateNames().map(function (s) { return '<option' + (s === S.state ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('');
+  var cl = clusterRows().filter(function (r) { return !S.state || r.State === S.state; }).map(function (r) { return r.Name; }).sort();
+  cs.innerHTML = '<option value="">' + (S.state ? 'All of ' + esc(S.state) : 'All clusters') + '</option>' + cl.map(function (c) { return '<option' + (c === S.cluster ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('');
 }
-function inScope(p) { return S.cluster === ALL || p.cl === S.cluster; }
+
+/* ---------- scope: India / State / Cluster ---------- */
+function scope() { return S.cluster ? { kind: 'cluster', name: S.cluster } : S.state ? { kind: 'state', name: S.state } : { kind: 'india', name: 'All India' }; }
+function inScope(p) { return S.cluster ? p.cl === S.cluster : S.state ? p.state === S.state : true; }
+function signed(x) { return x > 0 ? '+' + x : String(x); }
+function doFirst(x) {
+  var parts = [];
+  if (x.call) parts.push('call ' + x.call + (x.harsh ? ' (' + x.harsh + ' with harsh words)' : ''));
+  if (x.wait24) parts.push('reply ' + x.wait24 + ' waiting on Freshchat');
+  if (x.push) parts.push('push ' + x.push + ' stuck project' + (x.push > 1 ? 's' : ''));
+  var t = parts.length ? parts.join(', then ') : (x.pending ? 'reply ' + x.pending + ' new chat' + (x.pending > 1 ? 's' : '') + ' today' : 'on track');
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+/** A State row: the sum of its clusters (same rules as the sheet's cluster rows). */
+function stateRow(name) {
+  var rows = clusterRows().filter(function (r) { return r.State === name; }), o = { Level: 'State', Name: name, Cluster: '' };
+  NUMF.forEach(function (k) { o[k] = sum(rows, k); });
+  var olds = rows.map(function (r) { return r['Oldest wait (days)']; }).filter(function (v) { return v !== '' && v != null; });
+  o['Oldest wait (days)'] = olds.length ? Math.max.apply(null, olds.map(n)) : '';
+  var st = {};
+  S.d.P.forEach(function (p) { if (p.state === name && p.open && /push/.test(p.act)) { var s = p.stage || '(no stage)'; st[s] = (st[s] || 0) + 1; } });
+  var top = Object.keys(st).sort(function (a, b) { return st[b] - st[a]; })[0];
+  o['Most stuck at'] = top ? top + ' (' + st[top] + ')' : '';
+  o['Do first'] = doFirst({ call: o['Call now'], harsh: o['Harsh words'], wait24: o['Waiting > 24 h'], push: o['Push stuck'], pending: o['Pending chats'] });
+  var hasY = rows.some(function (r) { return r['Call now yesterday'] !== '' && r['Call now yesterday'] != null; });
+  var dc = o['Call now'] - o['Call now yesterday'], dw = o['Waiting > 24 h'] - o['Waiting > 24 h yesterday'];
+  o['vs yesterday'] = !hasY ? '-' : dc === 0 && dw === 0 ? 'Same as yesterday' : 'Call ' + signed(dc) + ', waiting ' + signed(dw);
+  o.State = name;
+  return o;
+}
+function stateRows() { return stateNames().map(stateRow).sort(function (a, b) { return b.Score - a.Score; }); }
+function scopeRow() {
+  var sc = scope(), A = S.d.A;
+  if (sc.kind === 'india') return A.find(function (x) { return x.Level === 'India'; }) || {};
+  if (sc.kind === 'state') return stateRow(sc.name);
+  return A.find(function (x) { return x.Level === 'Cluster' && x.Name === sc.name; }) || { Name: sc.name };
+}
+/** Rows one level down: India -> states (or clusters), state -> its clusters, cluster -> its cells. */
+function childRows() {
+  var sc = scope();
+  if (sc.kind === 'india') return hasStates() ? stateRows() : clusterRows();
+  if (sc.kind === 'state') return clusterRows().filter(function (r) { return r.State === sc.name; });
+  return S.d.A.filter(function (x) { return x.Level === 'Cell' && x.Cluster === sc.name; });
+}
+function childLabel() { var sc = scope(); return sc.kind === 'india' ? (hasStates() ? 'State' : 'Cluster') : sc.kind === 'state' ? 'Cluster in ' + sc.name : 'Cell in ' + sc.name; }
+function drill(r) { return r.Level === 'State' ? 'setState(' + js(r.Name) + ')' : r.Level === 'Cluster' ? 'setCluster(' + js(r.Name) + ')' : ''; }
+function crumb() {
+  var sc = scope(), h = '<div class="crumb">';
+  h += sc.kind === 'india' ? '<span class="cur">All India</span>' : '<a onclick="setState(\'\')">All India</a>';
+  if (S.state) h += ' &rsaquo; ' + (sc.kind === 'state' ? '<span class="cur">' + esc(S.state) + '</span>' : '<a onclick="setCluster(\'\')">' + esc(S.state) + '</a>');
+  if (S.cluster) h += ' &rsaquo; <span class="cur">' + esc(S.cluster) + '</span>';
+  return h + '</div>';
+}
 
 /* ---------- navigation ---------- */
 function sw(v) {
@@ -252,11 +334,15 @@ function sw(v) {
   document.getElementById('main').scrollTop = 0;
   if (v === 'trend' || v === 'pending') setTimeout(function () { renderCharts(v); }, 0);
 }
-function setCluster(c) { S.cluster = c; document.getElementById('cluster-sel').value = c; renderAll(); if (S.view === 'trend' || S.view === 'pending') renderCharts(S.view); }
-function openList(f) { S.f = Object.assign({ act: 'All', why: 'All', cell: 'All', age: 'All', show: 'All', q: '' }, f); renderList(); sw('list'); }
-function renderAll() { renderBoard(); renderClusters(); renderPending(); renderList(); renderTrend(); renderAbout(); }
+function setState(s) { S.state = s; S.cluster = ''; S.more = {}; S.f.cell = 'All'; fillPickers(); renderAll(); if (S.view === 'pending') renderCharts('pending'); }
+function setCluster(c) {
+  if (c) { var r = clusterRows().find(function (x) { return x.Name === c; }); if (r && hasStates()) S.state = r.State === NOSTATE ? S.state : r.State; }
+  S.cluster = c; S.more = {}; S.f.cell = 'All'; fillPickers(); renderAll(); if (S.view === 'pending') renderCharts('pending');
+}
+function openList(f) { S.f = Object.assign({ seg: 'all', why: 'All', cell: 'All', wait: 'All', q: '' }, f); S.more = {}; renderList(); sw('list'); }
+function renderAll() { renderBoard(); renderList(); renderClusters(); renderPending(); renderTrend(); renderAbout(); }
 
-/* ---------- table helper (sortable) ---------- */
+/* ---------- sortable table ---------- */
 function table(id, cols, rows, opt) {
   opt = opt || {};
   var st = S.sort[id];
@@ -268,15 +354,14 @@ function table(id, cols, rows, opt) {
   }
   var head = '<tr>' + cols.map(function (c, i) { var cls = (c.num ? 'num ' : '') + 'sortable' + (st && st.i === i ? (st.dir > 0 ? ' sort-asc' : ' sort-desc') : '');
     return '<th class="' + cls + '" onclick="sortBy(\'' + id + '\',' + i + ')"' + (c.tip ? ' title="' + esc(c.tip) + '"' : '') + '>' + esc(c.h) + '</th>'; }).join('') + '</tr>';
-  var top = opt.top ? opt.top.map(function (r) { return rowHtml(cols, r, 'india'); }).join('') : '';
+  var top = opt.top ? opt.top.map(function (r) { return rowHtml(cols, r, 'india', opt.click ? opt.click(r) : ''); }).join('') : '';
   var body = rows.map(function (r) { return rowHtml(cols, r, opt.rowClass ? opt.rowClass(r) : '', opt.click ? opt.click(r) : ''); }).join('');
   if (!rows.length && !top) body = '<tr><td colspan="' + cols.length + '" class="empty">' + esc(opt.empty || 'Nothing here.') + '</td></tr>';
   return '<div class="tw' + (opt.freeze ? ' freeze' : '') + '"><table id="' + id + '"><thead>' + head + '</thead><tbody>' + top + body + '</tbody></table></div>';
 }
 function rowHtml(cols, r, cls, click) {
-  return '<tr class="' + (cls || '') + (click ? ' click' : '') + '"' + (click ? ' onclick="' + click + '"' : '') + '>' + cols.map(function (c) {
-    var v = c.v(r), h = c.html ? c.html(r) : (c.num ? fmt(v) : esc(v));
-    var k = c.heat ? c.heat(r) : '';
+  return '<tr class="' + (cls || '') + (click ? ' click' : '') + '"' + (click ? ' onclick="' + esc(click) + '"' : '') + '>' + cols.map(function (c) {
+    var v = c.v(r), h = c.html ? c.html(r) : (c.num ? fmt(v) : esc(v)), k = c.heat ? c.heat(r) : '';
     return '<td class="' + (c.num ? 'num ' : '') + (k || '') + (c.num && !n(v) ? ' z' : '') + (c.cls ? ' ' + c.cls : '') + '">' + h + '</td>'; }).join('') + '</tr>';
 }
 function sortBy(id, i) { var st = S.sort[id]; S.sort[id] = st && st.i === i ? { i: i, dir: -st.dir } : { i: i, dir: -1 }; renderAll(); if (S.view === 'pending' || S.view === 'trend') renderCharts(S.view); }
@@ -285,69 +370,162 @@ function heatPush(r) { return n(r['Push stuck']) > 0 ? 'ha' : ''; }
 function heatHarsh(r) { return n(r['Harsh words']) > 0 ? 'hd' : ''; }
 function heatOld(r) { var o = r['Oldest wait (days)']; return o === '' || o == null ? '' : n(o) >= 7 ? 'hr' : n(o) >= 2 ? 'ha' : ''; }
 function heatNfc(r) { return n(r['Not in Freshchat data']) > 0 ? 'hp' : ''; }
+function oldCol() { return { h: 'Oldest wait (days)', num: 1, v: function (x) { return x['Oldest wait (days)'] === '' ? -1 : n(x['Oldest wait (days)']); }, html: function (x) { return x['Oldest wait (days)'] === '' ? '' : fmt(x['Oldest wait (days)']); }, heat: heatOld }; }
 
 /* ---------- Today ---------- */
 function renderBoard() {
-  var d = S.d, r = scopeRow(), L = d.links || {}, scope = S.cluster === ALL ? 'All India' : S.cluster;
+  var d = S.d, r = scopeRow(), L = d.links || {}, sc = scope();
   var pend = n(r['Pending chats']), old = r['Oldest wait (days)'];
   var cards = [
     { k: 'c-call', t: '1 &middot; Call now', v: r['Call now'], sub: fmt(r['Call + push']) + ' of them also need the project pushed (Call + push)',
-      who: 'Who: CX / chat team - call or WhatsApp with a real answer', list: "openList({act:'call'})", sheet: L.call },
+      who: 'Who: CX / chat team - call or WhatsApp with a real answer', list: "openList({seg:'call'})", sheet: L.call },
     { k: 'c-push', t: '2 &middot; Push stuck projects', v: r['Push stuck'], sub: r['Most stuck at'] ? 'Most stuck at ' + esc(r['Most stuck at']) : 'Projects to push',
-      who: 'Who: Ops cell - clear the step the project is stuck at', list: "openList({act:'push'})", sheet: L.push },
+      who: 'Who: Ops cell - clear the step the project is stuck at', list: "openList({seg:'push'})", sheet: L.push },
     { k: 'c-reply', t: '3 &middot; Reply on Freshchat', v: r['Waiting > 24 h'], sub: pend ? 'Chats waiting over 24 h - oldest ' + fmt(old) + ' days, ' + fmt(pend) + ' pending in all' : 'No chats pending now',
-      who: 'Who: Freshchat agents - reply on the chat', list: "openList({show:'wait24'})", sheet: L.reply },
+      who: 'Who: Freshchat agents - reply on the chat', list: "openList({seg:'reply',wait:'24'})", sheet: L.reply },
     { k: 'c-harsh', t: '4 &middot; Harsh words', v: r['Harsh words'], sub: 'Customers to call today, before it becomes an escalation',
-      who: 'Who: CX lead / city Ops head', list: "openList({why:'harsh'})", sheet: L.harsh }
+      who: 'Who: CX lead / city Ops head', list: "openList({seg:'call',why:'harsh'})", sheet: L.harsh }
   ];
-  var h = '<div class="ptitle">What to do today &middot; ' + esc(scope) + '</div>' +
+  var h = crumb() + '<div class="ptitle">What to do today &middot; ' + esc(sc.name) + '</div>' +
     '<div class="psub">Pending chats from ' + esc(dOnly(d.from)) + ' to today. Sheet data saved ' + dt(d.savedAt) + ', Freshchat replies up to ' + dt(d.dumpAt) + '.</div>' +
     staleWarn() +
-    '<div class="fy"><div class="fy-top"><div><div class="fy-lbl">Do first &middot; ' + esc(scope) + '</div><div class="fy-txt">' + esc(r['Do first'] || 'On track') + '</div>' +
+    '<div class="fy"><div class="fy-top"><div><div class="fy-lbl">Do first &middot; ' + esc(sc.name) + '</div><div class="fy-txt">' + esc(r['Do first'] || 'On track') + '</div>' +
     '<div class="fy-sub">vs yesterday: ' + esc(r['vs yesterday'] || '-') + '</div></div>' +
     '<div class="fy-stats">' + stat(r['Open rows'], 'Open on the list') + stat(pend, 'Pending chats') + stat(r['Not in Freshchat data'], 'Not in Freshchat') + stat(r['Wrote after the dump'], 'Wrote after the dump') + '</div></div></div>' +
     '<div class="agrid">' + cards.map(function (c) {
       return '<div class="ac ' + c.k + '"><div class="ac-hd">' + c.t + '</div><div class="ac-bd"><div class="ac-val">' + fmt(c.v) + '</div><div class="ac-sub">' + c.sub + '</div><div class="ac-who">' + c.who + '</div></div>' +
         '<div class="ac-ft"><button class="btn pri" onclick="' + c.list + '">See Project IDs</button>' + (c.sheet ? '<a class="btn" href="' + esc(c.sheet) + '" target="_blank" rel="noopener">Open in the sheet &#8599;</a>' : '') + '</div></div>'; }).join('') + '</div>';
-  var rows = S.cluster === ALL ? clusterRows() : d.A.filter(function (x) { return x.Level === 'Cell' && x.Cluster === S.cluster; });
-  var label = S.cluster === ALL ? 'Cluster' : 'Cell in ' + S.cluster;
-  h += '<div class="stitle">Where to act first - worst first<span class="hint">' + (S.cluster === ALL ? 'Click a cluster to see its cells' : 'Pick All India in the top bar to go back') + '</span></div>' +
+  var rows = childRows(), lab = childLabel();
+  h += '<div class="stitle">Where to act first - worst first<span class="hint">' + (sc.kind === 'cluster' ? 'Cells of this cluster' : 'Click a row to go one level down') + '</span></div>' +
     legend() +
     table('t-where', [
-      { h: label, v: function (x) { return x.Name; }, html: function (x) { return '<b>' + esc(x.Name) + '</b>'; } },
+      { h: lab, v: function (x) { return x.Name; }, html: function (x) { return '<b>' + esc(x.Name) + '</b>' + (x.Level === 'Cluster' && sc.kind === 'india' ? '' : ''); } },
       { h: 'Call now', num: 1, v: function (x) { return n(x['Call now']); }, heat: heatCall },
       { h: 'Push stuck', num: 1, v: function (x) { return n(x['Push stuck']); }, heat: heatPush },
       { h: 'Waiting > 24 h', num: 1, v: function (x) { return n(x['Waiting > 24 h']); } },
       { h: 'Harsh words', num: 1, v: function (x) { return n(x['Harsh words']); }, heat: heatHarsh },
-      { h: 'Oldest wait (days)', num: 1, v: function (x) { return x['Oldest wait (days)'] === '' ? -1 : n(x['Oldest wait (days)']); }, html: function (x) { return x['Oldest wait (days)'] === '' ? '' : fmt(x['Oldest wait (days)']); }, heat: heatOld },
+      oldCol(),
       { h: 'Not in Freshchat', num: 1, v: function (x) { return n(x['Not in Freshchat data']); }, heat: heatNfc },
       { h: 'Do first', v: function (x) { return x['Do first']; }, cls: 'do' },
       { h: 'vs yesterday', v: function (x) { return x['vs yesterday']; } }
-    ], rows, { click: S.cluster === ALL ? function (x) { return "setCluster('" + String(x.Name).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "')"; } : null, empty: 'No open rows or pending chats here.' });
-  h += alerts(rows, label);
+    ], rows, { click: drill, empty: 'No open rows or pending chats here.' });
+  h += alerts(rows);
   document.getElementById('p-board').innerHTML = h;
 }
 function stat(v, l) { return '<div><div class="fys-v">' + fmt(v) + '</div><div class="fys-l">' + esc(l) + '</div></div>'; }
 function legend() { return '<div class="legend"><span><i style="background:#fee2e2"></i>Call now / waited 7+ days</span><span><i style="background:#fef3c7"></i>Push stuck / waited 2+ days</span><span><i style="background:#7f1d1d"></i>Harsh words</span><span><i style="background:#f3e8ff"></i>Wrote on WhatsApp, not in Freshchat data</span></div>'; }
-function staleWarn() { var h = (Date.now() - new Date(S.d.savedAt)) / 3600000; return h > 26 ? '<div class="srcwarn show"><b>Old data:</b> the sheet last sent data ' + dt(S.d.savedAt) + ' (' + ago(S.d.savedAt) + '). Check the Run log in the sheet.</div>' : ''; }
-function alerts(rows, label) {
-  var out = [];
+function staleWarn() { var h = hrs(S.d.savedAt); return h > 26 ? '<div class="srcwarn show"><b>Old data:</b> the sheet last sent data ' + dt(S.d.savedAt) + ' (' + ago(S.d.savedAt) + '). Check the Run log in the sheet.</div>' : ''; }
+function alerts(rows) {
+  var out = [], what = childLabel().split(' ')[0].toLowerCase() + 's';
   var harsh = rows.filter(function (x) { return n(x['Harsh words']) > 0; });
-  if (harsh.length) out.push('<div class="ins crit"><div class="ins-title">Harsh words in ' + harsh.length + ' ' + (S.cluster === ALL ? 'clusters' : 'cells') + '</div><div class="ins-body">' +
-    harsh.map(function (x) { return esc(x.Name) + ' ' + fmt(x['Harsh words']); }).join(' &middot; ') + '. Call these customers today. <a href="#" onclick="openList({why:\'harsh\'});return false">See the Project IDs</a></div></div>');
+  if (harsh.length) out.push('<div class="ins crit"><div class="ins-title">Harsh words in ' + harsh.length + ' ' + what + '</div><div class="ins-body">' +
+    harsh.map(function (x) { return esc(x.Name) + ' ' + fmt(x['Harsh words']); }).join(' &middot; ') + '. Call these customers today. <a href="#" onclick="openList({seg:\'call\',why:\'harsh\'});return false">See the Project IDs</a></div></div>');
   var old = rows.filter(function (x) { return n(x['Oldest wait (days)']) >= 7; });
-  if (old.length) out.push('<div class="ins warn"><div class="ins-title">Chats waiting 7+ days in ' + old.length + ' ' + (S.cluster === ALL ? 'clusters' : 'cells') + '</div><div class="ins-body">' +
-    old.map(function (x) { return esc(x.Name) + ' (' + fmt(x['Oldest wait (days)']) + ' days)'; }).join(' &middot; ') + '. <a href="#" onclick="openList({age:\'7\'});return false">See the Project IDs</a></div></div>');
-  var nfc = rows.filter(function (x) { return n(x['Not in Freshchat data']) > 0; }), tot = nfc.reduce(function (t, x) { return t + n(x['Not in Freshchat data']); }, 0);
-  if (tot) out.push('<div class="ins info"><div class="ins-title">' + fmt(tot) + ' customers wrote on WhatsApp but are not in the Freshchat data</div><div class="ins-body">Agents may not see these chats. Call them directly. <a href="#" onclick="openList({show:\'nfc\'});return false">See the Project IDs</a></div></div>');
+  if (old.length) out.push('<div class="ins warn"><div class="ins-title">Chats waiting 7+ days in ' + old.length + ' ' + what + '</div><div class="ins-body">' +
+    old.map(function (x) { return esc(x.Name) + ' (' + fmt(x['Oldest wait (days)']) + ' days)'; }).join(' &middot; ') + '. <a href="#" onclick="openList({seg:\'reply\',wait:\'7\'});return false">See the Project IDs</a></div></div>');
+  var tot = sum(rows, 'Not in Freshchat data');
+  if (tot) out.push('<div class="ins info"><div class="ins-title">' + fmt(tot) + ' customers wrote on WhatsApp but are not in the Freshchat data</div><div class="ins-body">Agents may not see these chats. Call them directly. <a href="#" onclick="openList({seg:\'nfc\'});return false">See the Project IDs</a></div></div>');
   return out.length ? '<div class="stitle">Watch out</div>' + out.join('') : '';
 }
 
-/* ---------- Clusters (India summary) ---------- */
+/* ---------- Customer list ---------- */
+var WHYL = function (w) { var R = S.d.rules; return { harsh: 'Harsh words', wrote: 'Wrote ' + R.repeatTimes + '+ in ' + R.repeatDays + ' days', installed: 'Installed ' + R.installedDays + '+ days', seeking: 'Seeking cancellation', replied: 'Replied, still stuck' }[w] || w; };
+var SECS = [
+  { k: 'call', t: 'Call the customer', dot: '#c5221f', cls: 'a-call', who: 'CX / chat team', test: function (p) { return /^Call/.test(p.act); }, sort: 'new' },
+  { k: 'push', t: 'Push the project', dot: '#d97706', cls: 'a-push', who: 'Ops cell', test: function (p) { return p.act === PUSH; }, sort: 'new' },
+  { k: 'reply', t: 'Waiting for a reply on Freshchat', dot: '#1a56db', cls: 'a-reply', who: 'Freshchat agents', test: function (p) { return !p.act && p.age != null; }, sort: 'old' },
+  { k: 'nfc', t: 'Wrote on WhatsApp, not in Freshchat', dot: '#8b5cf6', cls: 'a-nfc', who: 'Call them directly', test: function (p) { return !p.act && p.age == null && p.nfc; }, sort: 'new' },
+  { k: 'other', t: 'On the list, nothing to do now', dot: '#9b9b90', cls: '', who: '', test: function (p) { return !p.act && p.age == null && !p.nfc; }, sort: 'new' }
+];
+function secOf(p) { for (var i = 0; i < SECS.length; i++) if (SECS[i].test(p)) return SECS[i].k; return 'other'; }
+function baseList() {
+  var f = S.f;
+  return S.d.P.filter(function (p) {
+    if (!inScope(p)) return false;
+    if (f.why === 'none' && (p.why || []).length) return false;
+    if (f.why !== 'All' && f.why !== 'none' && (p.why || []).indexOf(f.why) === -1) return false;
+    if (f.cell !== 'All' && p.cell !== f.cell) return false;
+    if (f.wait === '24' && !(p.age >= 4)) return false;
+    if (f.wait === '48' && !(p.age >= 5)) return false;
+    if (f.wait === '7' && p.age !== 7) return false;
+    if (f.wait === 'u24' && !(p.age != null && p.age < 4)) return false;
+    if (f.q && String(p.id).toLowerCase().indexOf(f.q.toLowerCase()) === -1) return false;
+    return true;
+  });
+}
+function segTest(k) {
+  if (k === 'call') return function (p) { return /^Call/.test(p.act); };
+  if (k === 'push') return function (p) { return /push/.test(p.act); };
+  if (k === 'reply') return function (p) { return p.age != null; };
+  if (k === 'nfc') return function (p) { return p.nfc; };
+  return function () { return true; };
+}
+function setF(k, v) { S.f[k] = v; S.more = {}; if (k === 'q') renderListBody(); else renderList(); }
+function renderList() {
+  var d = S.d, f = S.f, base = baseList(), sc = scope();
+  var cells = Array.from(new Set(d.P.filter(inScope).map(function (p) { return p.cell; }).filter(Boolean))).sort();
+  var segs = [['all', 'Everyone'], ['call', 'Call'], ['push', 'Push'], ['reply', 'Waiting for reply'], ['nfc', 'Not in Freshchat']];
+  var opt = function (k, list) { return list.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (String(f[k]) === String(o[0]) ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join(''); };
+  var h = crumb() + '<div class="ptitle">Customer list &middot; ' + esc(sc.name) + '</div>' +
+    '<div class="psub">Project IDs to act on, grouped by what to do. Names, phones and messages are in the Google Sheet.</div>' +
+    '<div class="seg">' + segs.map(function (s) { return '<button class="' + (f.seg === s[0] ? 'on' : '') + '" onclick="setF(\'seg\',\'' + s[0] + '\')">' + s[1] + '<span class="n">' + fmt(base.filter(segTest(s[0])).length) + '</span></button>'; }).join('') + '</div>' +
+    '<div class="lbar">' +
+    '<select onchange="setF(\'why\',this.value)">' + opt('why', [['All', 'Any reason'], ['harsh', 'Harsh words'], ['wrote', WHYL('wrote')], ['installed', WHYL('installed')], ['seeking', 'Seeking cancellation'], ['replied', 'Replied, still stuck'], ['none', 'No reason']]) + '</select>' +
+    '<select onchange="setF(\'wait\',this.value)">' + opt('wait', [['All', 'Any wait'], ['u24', 'Waiting under 24 h'], ['24', 'Waiting over 24 h'], ['48', 'Waiting over 2 days'], ['7', 'Waiting 7+ days']]) + '</select>' +
+    '<select onchange="setF(\'cell\',this.value)">' + opt('cell', [['All', 'All cells']].concat(cells.map(function (c) { return [c, c]; }))) + '</select>' +
+    '<input type="search" placeholder="Search Project ID" value="' + esc(f.q) + '" oninput="setF(\'q\',this.value)">' +
+    '<button class="btn" onclick="downloadCsv()" title="Download these Project IDs">&#8681; CSV</button>' +
+    '<button class="btn" onclick="openList({})">Clear</button></div>' +
+    '<div id="list-body"></div>';
+  document.getElementById('p-list').innerHTML = h;
+  renderListBody();
+}
+function listRows() { var t = segTest(S.f.seg); return baseList().filter(t); }
+function renderListBody() {
+  var rows = listRows(), sc = scope();
+  document.getElementById('nav-cnt').textContent = S.d.P.filter(function (p) { return inScope(p) && /^Call/.test(p.act); }).length || '';
+  var groups = {};
+  rows.forEach(function (p) { var k = S.f.seg === 'reply' ? 'reply' : S.f.seg === 'nfc' ? 'nfc' : secOf(p); (groups[k] = groups[k] || []).push(p); });
+  var hd = '<div class="lhd"><div>Project</div><div>Why</div><div>Last wrote</div><div>Agent reply</div><div>Stage</div></div>';
+  var h = SECS.filter(function (s) { return groups[s.k]; }).map(function (s) {
+    var list = groups[s.k].slice().sort(function (a, b) {
+      if (s.sort === 'old' && (a.age != null || b.age != null)) return (n(b.age) - n(a.age)) || String(a.last || '').localeCompare(String(b.last || ''));
+      return String(b.last || '').localeCompare(String(a.last || '')); });
+    var lim = S.more[s.k] ? list.length : 40;
+    return '<div class="lsec"><div class="lsec-hd"><span class="dot" style="background:' + s.dot + '"></span><span class="t">' + esc(s.t) + '</span><span class="n">' + fmt(list.length) + '</span>' +
+      (s.who ? '<span class="who">' + esc(s.who) + '</span>' : '') + '</div>' + hd +
+      list.slice(0, lim).map(function (p) { return rowCard(p, s, sc); }).join('') +
+      (list.length > lim ? '<button class="more" onclick="S.more[\'' + s.k + '\']=1;renderListBody()">Show all ' + fmt(list.length) + '</button>' : '') + '</div>';
+  }).join('');
+  document.getElementById('list-body').innerHTML = h || '<div class="card empty">No Project IDs match these filters.</div>';
+}
+function rowCard(p, s, sc) {
+  var where = [sc.kind === 'india' ? p.cl : '', p.cell, p.city && p.city !== p.cl ? p.city : ''].filter(Boolean).join(' &middot; ');
+  var tags = (p.act === BOTH ? '<span class="tag both">Call + push</span>' : '') +
+    (p.why || []).map(function (w) { return '<span class="tag' + (w === 'harsh' ? ' harsh' : '') + '">' + esc(WHYL(w)) + '</span>'; }).join('') +
+    (p.nfc ? '<span class="tag nfc">Not in Freshchat</span>' : '');
+  var wh = p.last ? hrs(p.last) : null, wcls = p.age == null ? '' : p.age >= 7 ? 'w3' : p.age >= 5 ? 'w2' : p.age >= 4 ? 'w1' : 'w0';
+  var wrote = p.last ? '<div class="when" title="' + esc(dt(p.last)) + '"><span class="k">Wrote </span>' + ago(p.last) + '</div>' + (p.age != null ? '<span class="wait ' + wcls + '">Waiting ' + span(wh) + '</span>' : '') : '<span class="muted">-</span>';
+  var rep = p.reply ? '<div class="when" title="' + esc(dt(p.reply)) + '"><span class="k">Agent reply </span>' + ago(p.reply) + '</div>' : '<span class="muted">No agent reply</span>';
+  var stage = (p.stage ? esc(p.stage) : '<span class="muted">-</span>') + (p.inst != null ? '<span class="sub">Day ' + fmt(p.inst) + ' since installation</span>' : '');
+  return '<div class="lrow ' + s.cls + '"><div class="c-id"><span class="pid">' + esc(p.id) + '</span><span class="sub">' + (where || '&nbsp;') + '</span></div>' +
+    '<div class="c-why"><div class="tags">' + (tags || '<span class="muted">-</span>') + '</div></div><div class="c-wr">' + wrote + '</div><div class="c-rep">' + rep + '</div><div class="c-stage">' + stage + '</div></div>';
+}
+function downloadCsv() {
+  var rows = listRows(), q = function (v) { v = String(v == null ? '' : v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+  var lines = [['Project ID', 'Action', 'Reason', 'Waiting', 'Last wrote', 'Last agent reply', 'State', 'Cluster', 'City', 'Cell', 'Stage', 'Days since installation', 'Message type', 'Status', 'Not in Freshchat data'].join(',')];
+  rows.forEach(function (p) { lines.push([p.id, p.act, (p.why || []).map(WHYL).join('; '), p.age == null ? '' : (S.d.ageLabels || [])[p.age], p.last ? dt(p.last) : '', p.reply ? dt(p.reply) : '', p.state === NOSTATE ? '' : p.state, p.cl, p.city, p.cell, p.stage, p.inst == null ? '' : p.inst, p.mt, p.st, p.nfc ? 'Yes' : ''].map(q).join(',')); });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' }));
+  a.download = 'ews-project-ids-' + scope().name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.csv';
+  document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+/* ---------- States & clusters ---------- */
 function renderClusters() {
   var d = S.d, india = d.A.filter(function (x) { return x.Level === 'India'; });
   var cols = [
-    { h: 'Cluster', v: function (x) { return x.Level === 'India' ? 'All India' : x.Name; }, html: function (x) { return '<b>' + esc(x.Level === 'India' ? 'All India' : x.Name) + '</b>'; } },
+    { h: hasStates() ? 'State / cluster' : 'Cluster', v: function (x) { return x.Level === 'India' ? 'All India' : x.Name; }, html: function (x) { return x.Level === 'Cluster' && hasStates() && !S.sort['t-cl'] ? '&nbsp;&nbsp;&nbsp;' + esc(x.Name) : '<b>' + esc(x.Level === 'India' ? 'All India' : x.Name) + '</b>'; } },
     { h: 'Do first', v: function (x) { return x['Do first']; }, cls: 'do' },
     { h: 'Call now', num: 1, v: function (x) { return n(x['Call now']); }, heat: heatCall },
     { h: 'Call + push', num: 1, v: function (x) { return n(x['Call + push']); } },
@@ -357,24 +535,43 @@ function renderClusters() {
     { h: 'Wrote ' + d.rules.repeatTimes + '+ times', num: 1, tip: 'in ' + d.rules.repeatDays + ' days', v: function (x) { return n(x['Wrote 3+ times']); } },
     { h: 'Waiting > 24 h', num: 1, v: function (x) { return n(x['Waiting > 24 h']); } },
     { h: 'Pending chats', num: 1, v: function (x) { return n(x['Pending chats']); } },
-    { h: 'Oldest wait (days)', num: 1, v: function (x) { return x['Oldest wait (days)'] === '' ? -1 : n(x['Oldest wait (days)']); }, html: function (x) { return x['Oldest wait (days)'] === '' ? '' : fmt(x['Oldest wait (days)']); }, heat: heatOld },
+    oldCol(),
     { h: 'Not in Freshchat', num: 1, v: function (x) { return n(x['Not in Freshchat data']); }, heat: heatNfc },
     { h: 'Wrote after the dump', num: 1, v: function (x) { return n(x['Wrote after the dump']); } },
     { h: 'Open rows', num: 1, v: function (x) { return n(x['Open rows']); } },
     { h: 'vs yesterday', v: function (x) { return x['vs yesterday']; } }
   ];
-  document.getElementById('p-clusters').innerHTML = '<div class="ptitle">Clusters - where to act</div>' +
-    '<div class="psub">All India on top, clusters worst first. Click a column to sort, a cluster to open its day.</div>' + legend() +
-    table('t-cl', cols, clusterRows(), { top: india, freeze: true, click: function (x) { return "setCluster('" + String(x.Name).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "');sw('board')"; } });
+  var rows;
+  if (hasStates() && !S.sort['t-cl']) {
+    rows = [];
+    stateRows().filter(function (s) { return !S.state || s.Name === S.state; }).forEach(function (s) {
+      rows.push(s);
+      clusterRows().filter(function (c) { return c.State === s.Name; }).sort(function (a, b) { return n(b.Score) - n(a.Score); }).forEach(function (c) { rows.push(c); });
+    });
+  } else rows = clusterRows().filter(function (c) { return !S.state || c.State === S.state; });
+  document.getElementById('p-clusters').innerHTML = crumb() + '<div class="ptitle">' + (hasStates() ? 'States and clusters' : 'Clusters') + ' - where to act</div>' +
+    '<div class="psub">' + (hasStates() ? 'States worst first, each with its clusters. State from Dilip\'s FC_Data (City to State). ' : '') + 'Click a row to open its day; click a column to sort.</div>' + legend() +
+    table('t-cl', cols, rows, { top: S.state ? [] : india, freeze: true, rowClass: function (x) { return x.Level === 'State' ? 'grp' : ''; },
+      click: function (x) { return x.Level === 'India' ? "setState('');sw('board')" : drill(x) + ";sw('board')"; } });
 }
 
 /* ---------- Pending chats ---------- */
+function pendRows() {
+  var rows = S.d.pending.rows || [], cl = rows.slice(1);
+  cl.forEach(function (r) { r.state = stateOf(r.name); });
+  return { india: rows[0], clusters: cl };
+}
+function addArr(rows, k, len) { var t = new Array(len).fill(0); rows.forEach(function (r) { (r[k] || []).forEach(function (v, i) { t[i] += n(v); }); }); return t; }
+function pendScope() {
+  var pr = pendRows(), sc = scope();
+  if (sc.kind === 'india') return pr.india || { a: [], b: [] };
+  var rows = pr.clusters.filter(function (r) { return sc.kind === 'state' ? r.state === sc.name : r.name === sc.name; });
+  return { name: sc.name, a: addArr(rows, 'a', 14), b: addArr(rows, 'b', 12) };
+}
 function renderPending() {
-  var d = S.d, P = d.pending, rows = P.rows || [], ages = d.ageLabels || [];
-  var pick = S.cluster === ALL ? rows[0] : rows.find(function (x) { return x.name === S.cluster; });
-  var a = pick ? pick.a : [], b = pick ? pick.b : [];
+  var d = S.d, P = d.pending, pr = pendRows(), sc = scope(), pick = pendScope(), a = pick.a || [], b = pick.b || [];
   var w24 = function (arr, off) { return arr.slice(off + 4, off + 8).reduce(function (t, v) { return t + n(v); }, 0); };
-  var h = '<div class="ptitle">Pending chats &middot; ' + esc(S.cluster) + '</div><div class="psub">Wrote to us from ' + esc(dOnly(d.from)) + ' to today and still waiting for an agent reply. ' +
+  var h = crumb() + '<div class="ptitle">Pending chats &middot; ' + esc(sc.name) + '</div><div class="psub">Wrote to us from ' + esc(dOnly(d.from)) + ' to today and still waiting for an agent reply. ' +
     'Two views side by side until we keep one: <b>EWS sheet</b> (customers) and <b>Commissioning Dashboard</b> (chats).</div>';
   h += '<div class="stitle">EWS sheet - customers<span class="hint">Metabase list, messages after installation, reply from the Freshchat dump</span></div>' +
     '<div class="mgrid">' + mc('Wrote to us', a[1], 'of ' + fmt(a[0]) + ' installed, not commissioned') + mc('Replied', a[2], pct(a[2], a[1]) + ' of who wrote') +
@@ -382,9 +579,19 @@ function renderPending() {
   if (P.haveCx) h += '<div class="stitle">Commissioning Dashboard - chats<span class="hint">Dilip\'s data and rules, saved ' + dt(d.cxSavedAt) + '</span></div>' +
     '<div class="mgrid">' + mc('Chats with a customer message', b[0], fmt(b[1]) + ' customers') + mc('Replied', b[2], pct(b[2], b[0]) + ' of chats') +
     mc('Not replied', b[3], fmt(w24(b, 4)) + ' waiting over 24 h') + mc('Not replied 7+ days', b[11], 'oldest bucket') + '</div>';
-  h += '<div class="card"><div class="ctitle">Waiting by age &middot; ' + esc(S.cluster) + '</div><div class="cwrap"><canvas id="ch-age"></canvas></div></div>';
+  h += '<div class="card"><div class="ctitle">Waiting by age &middot; ' + esc(sc.name) + '</div><div class="cwrap"><canvas id="ch-age"></canvas></div></div>';
+  var rows, lab;
+  if (sc.kind === 'india' && hasStates()) {
+    lab = 'State';
+    var st = {};
+    pr.clusters.forEach(function (r) { (st[r.state] = st[r.state] || []).push(r); });
+    rows = Object.keys(st).map(function (s) { return { name: s, level: 'State', a: addArr(st[s], 'a', 14), b: addArr(st[s], 'b', 12) }; }).sort(function (x, y) { return y.a[3] - x.a[3]; });
+  } else {
+    lab = sc.kind === 'india' ? 'Cluster' : 'Cluster in ' + (S.state || sc.name);
+    rows = pr.clusters.filter(function (r) { return sc.kind === 'india' || (S.state ? r.state === S.state : r.name === sc.name); });
+  }
   var cols = [
-    { h: 'Cluster', v: function (x) { return x.name; }, html: function (x) { return '<b>' + esc(x.name) + '</b>'; } },
+    { h: lab, v: function (x) { return x.name; }, html: function (x) { return '<b>' + esc(x.name) + '</b>'; } },
     { h: 'Installed, not comm.', num: 1, v: function (x) { return n(x.a[0]); } },
     { h: 'Wrote to us', num: 1, v: function (x) { return n(x.a[1]); } },
     { h: 'Replied', num: 1, v: function (x) { return n(x.a[2]); } },
@@ -399,102 +606,24 @@ function renderPending() {
     { h: 'CD not replied', num: 1, v: function (x) { return n(x.b[3]); }, heat: function (x) { return n(x.b[3]) > 0 ? 'hr' : ''; } },
     { h: 'CD 7+ days', num: 1, v: function (x) { return n(x.b[11]); } }
   ]);
-  h += '<div class="stitle">By cluster<span class="hint">CD = Commissioning Dashboard</span></div>' +
-    table('t-pend', cols, rows.slice(1), { top: rows.slice(0, 1), freeze: true, click: function (x) { return "setCluster('" + String(x.name).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "')"; } });
-  if (P.why && P.why.length) h += '<div class="stitle">Why the two views differ<span class="hint">India, customers in the date range</span></div><div class="card">' +
+  h += '<div class="stitle">By ' + esc(lab.split(' ')[0].toLowerCase()) + '<span class="hint">CD = Commissioning Dashboard</span></div>' +
+    table('t-pend', cols, rows, { top: sc.kind === 'india' ? [pr.india] : [], freeze: true,
+      click: function (x) { return x.level === 'State' ? 'setState(' + js(x.name) + ')' : x === pr.india ? '' : 'setCluster(' + js(x.name) + ')'; } });
+  if (P.why && P.why.length && sc.kind === 'india') h += '<div class="stitle">Why the two views differ<span class="hint">India, customers in the date range</span></div><div class="card">' +
     P.why.map(function (w) { var sub = /^\s/.test(w[0]); return '<div class="why-row' + (sub ? ' sub' : '') + '"><span>' + esc(String(w[0]).trim()) + '</span><span class="mono">' + fmt(w[1]) + '</span></div>'; }).join('') + '</div>';
   document.getElementById('p-pending').innerHTML = h;
 }
 function mc(l, v, sub) { return '<div class="mc"><div class="mc-lbl">' + esc(l) + '</div><div class="mc-val">' + fmt(v) + '</div><div class="mc-sub">' + esc(sub || '') + '</div></div>'; }
 function pct(a, b) { return n(b) ? Math.round(100 * n(a) / n(b)) + '%' : '-'; }
 
-/* ---------- Customer list ---------- */
-function listRows() {
-  var f = S.f;
-  return S.d.P.filter(function (p) {
-    if (!inScope(p)) return false;
-    if (f.act === 'call' && !/^Call/.test(p.act)) return false;
-    if (f.act === 'push' && !/push/.test(p.act)) return false;
-    if (f.act === 'none' && p.act) return false;
-    if (f.act !== 'All' && ['call', 'push', 'none'].indexOf(f.act) === -1 && p.act !== f.act) return false;
-    if (f.why === 'none' && (p.why || []).length) return false;
-    if (f.why !== 'All' && f.why !== 'none' && (p.why || []).indexOf(f.why) === -1) return false;
-    if (f.cell !== 'All' && p.cell !== f.cell) return false;
-    if (f.age === '7' && p.age !== 7) return false;
-    if (f.age !== 'All' && f.age !== '7' && String(p.age) !== f.age) return false;
-    if (f.show === 'open' && !p.open) return false;
-    if (f.show === 'pending' && p.age == null) return false;
-    if (f.show === 'wait24' && !(p.age >= 4)) return false;
-    if (f.show === 'nfc' && !p.nfc) return false;
-    if (f.q && String(p.id).toLowerCase().indexOf(f.q.toLowerCase()) === -1) return false;
-    return true;
-  }).sort(function (a, b) { var r = function (x) { return [BOTH, CALL, PUSH].indexOf(x.act) === -1 ? 3 : [BOTH, CALL, PUSH].indexOf(x.act); };
-    return r(a) - r(b) || String(b.last || '').localeCompare(String(a.last || '')); });
-}
-function setF(k, v) { S.f[k] = v; renderList(); }
-function renderList() {
-  var d = S.d, f = S.f, rows = listRows(), ages = d.ageLabels || [];
-  var cells = Array.from(new Set(d.P.filter(inScope).map(function (p) { return p.cell; }).filter(Boolean))).sort();
-  var opt = function (k, list) { return list.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (String(f[k]) === String(o[0]) ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join(''); };
-  var h = '<div class="ptitle">Customer list &middot; ' + esc(S.cluster) + '</div><div class="psub">Project IDs to act on: open on the Worklist, or waiting for a reply on Freshchat. ' +
-    'Names, phones and messages are in the Google Sheet. Action first, newest message first.</div>' +
-    '<div class="fbar">' +
-    '<label>Action<select onchange="setF(\'act\',this.value)">' + opt('act', [['All', 'All'], ['call', 'Call (any)'], [BOTH, BOTH], [CALL, CALL], ['push', 'Push (any)'], [PUSH, PUSH], ['none', 'No action']]) + '</select></label>' +
-    '<label>Reason<select onchange="setF(\'why\',this.value)">' + opt('why', [['All', 'All']].concat(Object.keys(WHY).map(function (k) { return [k, k === 'installed' ? 'Installed ' + d.rules.installedDays + '+ days ago' : k === 'wrote' ? 'Wrote ' + d.rules.repeatTimes + '+ times in ' + d.rules.repeatDays + ' days' : WHY[k]]; }), [['none', 'No reason']])) + '</select></label>' +
-    '<label>Cell<select onchange="setF(\'cell\',this.value)">' + opt('cell', [['All', 'All']].concat(cells.map(function (c) { return [c, c]; }))) + '</select></label>' +
-    '<label>Waiting<select onchange="setF(\'age\',this.value)">' + opt('age', [['All', 'All']].concat(ages.map(function (a, i) { return [String(i), a]; }))) + '</select></label>' +
-    '<label>Show<select onchange="setF(\'show\',this.value)">' + opt('show', [['All', 'Everyone'], ['open', 'Open on the Worklist'], ['pending', 'Pending chats'], ['wait24', 'Waiting over 24 h'], ['nfc', 'Not in Freshchat data']]) + '</select></label>' +
-    '<label class="grow">Project ID<input type="search" placeholder="Search" value="' + esc(f.q) + '" oninput="S.f.q=this.value;renderListBody()"></label>' +
-    '<button class="btn" onclick="downloadCsv()" title="Project IDs with the columns below">&#8681; CSV</button>' +
-    '<button class="btn" onclick="openList({})">Clear</button></div>' +
-    '<div id="list-body"></div>';
-  document.getElementById('p-list').innerHTML = h;
-  renderListBody();
-}
-function actBadge(a) { return a === BOTH ? '<span class="badge b-both">Call + push</span>' : a === CALL ? '<span class="badge b-call">Call</span>' : a === PUSH ? '<span class="badge b-push">Push</span>' : '<span class="badge b-none">-</span>'; }
-function ageBadge(i) { if (i == null) return ''; var l = (S.d.ageLabels || [])[i] || ''; var k = i >= 7 ? 'b-age7' : i >= 5 ? 'b-age2' : i >= 4 ? 'b-age1' : 'b-age0'; return '<span class="badge ' + k + '">' + esc(l) + '</span>'; }
-function whyBadges(p) { return (p.why || []).map(function (w) { return '<span class="badge ' + (w === 'harsh' ? 'b-harsh' : 'b-tag') + '">' + esc(w === 'installed' ? 'Installed ' + S.d.rules.installedDays + '+ d' : w === 'wrote' ? 'Wrote ' + S.d.rules.repeatTimes + '+' : WHY[w] || w) + '</span>'; }).join(' ') + (p.nfc ? ' <span class="badge b-nfc">Not in Freshchat</span>' : ''); }
-var LIST_COLS = [
-  { h: 'Project ID', v: function (p) { return p.id; }, html: function (p) { return '<span class="mono"><b>' + esc(p.id) + '</b></span>'; } },
-  { h: 'Action', v: function (p) { return p.act; }, html: function (p) { return actBadge(p.act); } },
-  { h: 'Reason', v: function (p) { return (p.why || []).join(','); }, html: whyBadges, cls: 'wrap' },
-  { h: 'Waiting', v: function (p) { return p.age == null ? -1 : p.age; }, html: function (p) { return ageBadge(p.age); } },
-  { h: 'Last wrote', v: function (p) { return p.last || ''; }, html: function (p) { return '<span class="mono">' + dt(p.last) + '</span>'; } },
-  { h: 'Last agent reply', v: function (p) { return p.reply || ''; }, html: function (p) { return '<span class="mono">' + dt(p.reply) + '</span>'; } },
-  { h: 'Cluster', v: function (p) { return p.cl; } },
-  { h: 'City', v: function (p) { return p.city; } },
-  { h: 'Cell', v: function (p) { return p.cell; } },
-  { h: 'Stage', v: function (p) { return p.stage; } },
-  { h: 'Days since installation', num: 1, v: function (p) { return p.inst == null ? -1 : p.inst; }, html: function (p) { return p.inst == null ? '' : fmt(p.inst); } },
-  { h: 'Message type', v: function (p) { return p.mt; } },
-  { h: 'Status', v: function (p) { return p.st; } }
-];
-function renderListBody() {
-  var rows = listRows();
-  var nav = document.getElementById('nav-cnt'); nav.textContent = S.d.P.filter(function (p) { return inScope(p) && /^Call/.test(p.act); }).length || '';
-  document.getElementById('list-body').innerHTML = '<div class="count" style="margin-bottom:8px">' + fmt(rows.length) + ' Project IDs</div>' +
-    table('t-list', LIST_COLS, rows, { freeze: true, empty: 'No Project IDs match these filters.' });
-}
-function downloadCsv() {
-  var rows = listRows(), q = function (v) { v = String(v == null ? '' : v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-  var lines = [['Project ID', 'Action', 'Reason', 'Waiting', 'Last wrote', 'Last agent reply', 'Cluster', 'City', 'Cell', 'Stage', 'Days since installation', 'Message type', 'Status', 'Not in Freshchat data'].join(',')];
-  rows.forEach(function (p) { lines.push([p.id, p.act, (p.why || []).map(function (w) { return WHY[w] || w; }).join('; '), p.age == null ? '' : (S.d.ageLabels || [])[p.age], dt(p.last).replace('&ndash;', ''), dt(p.reply).replace('&ndash;', ''), p.cl, p.city, p.cell, p.stage, p.inst == null ? '' : p.inst, p.mt, p.st, p.nfc ? 'Yes' : ''].map(q).join(',')); });
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' }));
-  a.download = 'ews-project-ids-' + (S.cluster === ALL ? 'india' : S.cluster.toLowerCase().replace(/[^a-z0-9]+/g, '-')) + '.csv';
-  document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
-}
-
 /* ---------- Trend ---------- */
 function renderTrend() {
   var d = S.d, types = d.msgTypes || [], tot = types.reduce(function (t, x) { return t + n(x[1]); }, 0);
-  var h = '<div class="ptitle">Trend &middot; All India</div><div class="psub">One point a day from the sheet\'s History tab (open rows at the end of each day).</div>' +
+  document.getElementById('p-trend').innerHTML = '<div class="ptitle">Trend &middot; All India</div><div class="psub">One point a day from the sheet\'s History tab (open rows at the end of each day).</div>' +
     (d.T.length < 2 ? '<div class="srcwarn show">The trend fills one point a day; it started on ' + esc(d.T.length ? dOnly(d.T[0].Date) : 'the first night') + '.</div>' : '') +
     '<div class="card"><div class="ctitle">Open on the list, call the customer, project stuck</div><div class="cwrap"><canvas id="ch-trend"></canvas></div></div>' +
-    '<div class="twocol"><div class="card"><div class="ctitle">What they wrote about (open rows, rough tag from words)</div><div class="cwrap" style="height:' + Math.max(160, types.length * 28) + 'px"><canvas id="ch-types"></canvas></div></div>' +
-    '<div class="card"><div class="ctitle">Closed each day</div><div class="cwrap"><canvas id="ch-closed"></canvas></div></div></div>' +
-    '<div class="psub">Message types: ' + fmt(tot) + ' open rows.</div>';
-  document.getElementById('p-trend').innerHTML = h;
+    '<div class="twocol"><div class="card"><div class="ctitle">What they wrote about (' + fmt(tot) + ' open rows, rough tag from words)</div><div class="cwrap" style="height:' + Math.max(160, types.length * 28) + 'px"><canvas id="ch-types"></canvas></div></div>' +
+    '<div class="card"><div class="ctitle">Closed each day</div><div class="cwrap"><canvas id="ch-closed"></canvas></div></div></div>';
 }
 function chart(id, cfg) { if (S.charts[id]) S.charts[id].destroy(); var el = document.getElementById(id); if (!el || typeof Chart === 'undefined') return; S.charts[id] = new Chart(el, cfg); }
 var FONT = { family: "'DM Sans',sans-serif", size: 11 };
@@ -514,10 +643,10 @@ function renderCharts(v) {
       options: baseOpts({ scales: { x: { stacked: true, ticks: { font: FONT }, grid: { display: false } }, y: { stacked: true, beginAtZero: true, ticks: { font: FONT, precision: 0 } } } }) });
   }
   if (v === 'pending') {
-    var rows = d.pending.rows || [], pick = S.cluster === ALL ? rows[0] : rows.find(function (x) { return x.name === S.cluster; });
-    if (!pick) return;
-    var ds = [{ label: 'EWS sheet - pending customers', data: pick.a.slice(5, 13).map(n), backgroundColor: '#1a56db', borderRadius: 3 }];
-    if (d.pending.haveCx) ds.push({ label: 'Commissioning Dashboard - not replied chats', data: pick.b.slice(4, 12).map(n), backgroundColor: '#f59e0b', borderRadius: 3 });
+    var pick = pendScope();
+    if (!pick || !pick.a) return;
+    var ds = [{ label: 'EWS sheet - pending customers', data: (pick.a || []).slice(5, 13).map(n), backgroundColor: '#1a56db', borderRadius: 3 }];
+    if (d.pending.haveCx) ds.push({ label: 'Commissioning Dashboard - not replied chats', data: (pick.b || []).slice(4, 12).map(n), backgroundColor: '#f59e0b', borderRadius: 3 });
     chart('ch-age', { type: 'bar', data: { labels: d.ageLabels, datasets: ds }, options: baseOpts() });
   }
 }
@@ -534,6 +663,7 @@ function renderAbout() {
     '<p><b>Pending chats.</b> A customer is pending when their last message (from ' + esc(dOnly(d.from)) + ' to today) has no agent reply after it in the Freshchat dump. ' +
     'Replies come from the daily Freshchat dump, so a reply can show up to a day late (dump up to ' + dt(d.dumpAt) + ').</p>' +
     '<p><b>Not in Freshchat data.</b> The customer wrote on WhatsApp but is not in the Freshchat data, so agents may not see the chat. Call them directly.</p>' +
+    '<p><b>States.</b> ' + (hasStates() ? 'Each cluster takes its State from ' + esc(d.stateSource || 'Dilip\'s FC_Data') + ': the State of the city with the same name, else the State most of its projects carry there.' : 'Shown once the Commissioning Dashboard data has been read.') + '</p>' +
     '<p><b>Refresh.</b> The sheet pulls at 09:30 and 14:30 and sends this page its numbers after each pull. "vs yesterday" compares with last night.</p>' +
     '<p><b>What this page shows.</b> Counts and Project IDs only. Customer names, phones and messages stay in the Google Sheet, which only the Ops team can open.</p>' +
     '</div>';
