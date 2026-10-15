@@ -9,11 +9,12 @@ Live at **https://yashk-sse.github.io/Ops-EWS-Dashboard/** (GitHub Pages, from `
 ## What is on it
 
 - **What to do today** - the "Do first" line, four action cards (Call now, Push stuck projects, Reply on Freshchat,
-  Harsh words) with who acts, and the clusters (or the cells of the picked cluster) worst first.
-- **Clusters** - the India summary table: every cluster with its counts and "Do first".
+  Harsh words) with who acts, and the next level down worst first: States, then clusters, then cells.
+- **States & clusters** - the India summary table, grouped by State. State comes from Dilip's FC_Data (City -> State).
 - **Pending chats** - who wrote to us and still waits for an agent reply, by age; EWS sheet (customers) next to the
   Commissioning Dashboard (chats), and why the two differ.
-- **Customer list** - Project IDs to act on, with filters (action, reason, cell, waiting time) and a CSV download.
+- **Customer list** - Project IDs grouped by what to do (call, push, waiting for a reply, not in Freshchat), with
+  filters (reason, waiting time, cell, search) and a CSV download.
 - **Trend** - one point a day from the sheet's History tab; message types of open rows.
 
 ## Data
@@ -37,6 +38,9 @@ Design (palette, type, top bar, sidebar, cards, tables) follows the Referral Das
 (`yashk-SSE/Referral-Dashboard`).
 
 ## Local preview
+
+The script commits `data/ews.json` after every pull, so run `git pull --rebase` before pushing page changes.
+
 
 Serve the folder (`python -m http.server 8771`) and open `http://localhost:8771/`. For real-sized data, build a
 local `data/ews.json` from a Drive export of the sheet with `tools/ops_flags/ews_json_from_export.py` (in the
