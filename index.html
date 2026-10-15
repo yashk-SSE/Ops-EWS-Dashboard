@@ -111,6 +111,28 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 .why-row:last-child{border:none}.why-row.sub{padding-left:14px;color:var(--t2)}
 .why-row .mono{font-weight:600;font-family:'DM Mono',monospace}
 .empty{padding:24px;text-align:center;color:var(--t3);font-size:12px}
+/* Filter bar + multi-select (the Referral Dashboard's date-range bar and multi-city picker) */
+.fbar{position:sticky;top:0;z-index:250;display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#eff6ff;border-bottom:1px solid #bfdbfe;padding:8px 16px}
+.fbar .fl{font-size:10px;font-weight:700;color:#1e3a8a;text-transform:uppercase;letter-spacing:.5px;margin-right:2px}
+.fbar .clr{font-size:11px;font-weight:600;color:var(--bl);cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:4px}
+.ms{position:relative;display:inline-block}
+.ms-btn{padding:5px 10px;border:1px solid var(--bd2);border-radius:7px;background:var(--sur);font-size:12px;cursor:pointer;min-width:170px;display:flex;align-items:center;gap:7px;color:var(--tx);font-family:'DM Sans',sans-serif}
+.ms-btn .lb{font-size:9.5px;color:var(--t3);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.ms-btn .vl{font-weight:600;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ms-btn .ar{margin-left:auto;font-size:9px;color:var(--t3)}
+.ms-btn.on{border-color:var(--bl);background:var(--bll)}.ms-btn.on .vl{color:var(--bl)}
+.ms-dd{display:none;position:absolute;z-index:400;top:calc(100% + 4px);left:0;width:260px;max-width:calc(100vw - 32px);background:var(--sur);border:1px solid var(--bd2);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.14);overflow:hidden;flex-direction:column}
+.ms-dd.open{display:flex}
+.ms-search{padding:7px 10px;border-bottom:1px solid var(--bd)}
+.ms-search input{border:none;outline:none;width:100%;font-size:12px;font-family:'DM Sans',sans-serif;background:transparent;color:var(--tx)}
+.ms-all{padding:7px 12px;font-size:12px;font-weight:600;color:var(--bl);cursor:pointer;display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--bd)}
+.ms-list{max-height:300px;overflow-y:auto;padding:4px 0}
+.ms-grp{padding:8px 12px 3px;font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
+.ms-opt{padding:6px 12px 6px 16px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:8px}
+.ms-opt:hover{background:var(--s2)}
+.ms-opt input,.ms-all input{accent-color:var(--bl);width:14px;height:14px;flex-shrink:0;cursor:pointer}
+.ms-foot{padding:8px 10px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:6px;background:var(--s2)}
+.ms-foot .cnt{font-size:11px;color:var(--t2);margin-right:auto}
 /* Customer list */
 .seg{display:flex;gap:4px;background:var(--s2);border-radius:9px;padding:3px;flex-wrap:wrap;margin-bottom:8px}
 .seg button{border:none;background:transparent;border-radius:7px;padding:6px 11px;font-size:12px;font-weight:500;color:var(--t2);cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;white-space:nowrap}
@@ -155,8 +177,9 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
   .tw table th:first-child{background:#eef2ff;z-index:6}
   tr.india td:first-child{background:#fafaf7}tr.grp td:first-child{background:#eef2ff}
   .lsec-hd .who{display:none}
+  .ms{position:static}.ms-dd{left:16px;right:16px;width:auto;max-width:none}
 }
-@media(max-width:480px){.logo .nm,.fy-pill,.logo img{display:none}}
+@media(max-width:480px){.fy-pill{display:none}.ms-btn{min-width:0}.ms-btn .vl{max-width:100px}}
 @media(max-width:420px){.agrid{grid-template-columns:1fr 1fr}.ac-hd{font-size:9px;padding:6px 8px}.ac-bd,.ac-ft{padding:8px}.ac-val{font-size:22px}}
 </style>
 </head>
@@ -164,8 +187,6 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 <div class="top">
   <div class="logo"><img src="logo.jpg" alt="SolarSquare"><span class="nm">SolarSquare</span><span class="sep">|</span><span class="sub">Ops EWS</span></div>
   <div class="top-r">
-    <select class="csel" id="state-sel" title="State" onchange="setState(this.value)"></select>
-    <select class="csel" id="cluster-sel" title="Cluster" onchange="setCluster(this.value)"></select>
     <div class="fy-pill" id="saved-pill">Data: &ndash;</div>
     <div class="upd hide-s" id="dump-lbl">&ndash;</div>
     <a class="rbtn" id="sheet-btn" href="#" target="_blank" rel="noopener" title="Opens the Google Sheet (SolarSquare login, people it is shared with)">&#8599;<span id="sheet-btn-txt"> Open the sheet</span></a>
@@ -197,6 +218,7 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 <main class="main" id="main">
   <div class="loading" id="loading"><div class="spin"></div>Loading the latest data&hellip;</div>
   <div id="app" style="display:none">
+    <div class="fbar" id="fbar"></div>
     <section class="panel active" id="p-board"></section>
     <section class="panel" id="p-list"></section>
     <section class="panel" id="p-clusters"></section>
@@ -208,7 +230,7 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 </div>
 <script>
 'use strict';
-var S = { d: null, state: '', cluster: '', view: 'board', charts: {}, sort: {}, more: {},
+var S = { d: null, states: [], clusters: [], tmp: {}, view: 'board', charts: {}, sort: {}, more: {},
   f: { seg: 'all', why: 'All', cell: 'All', wait: 'All', q: '' } };
 var CALL = 'Call the customer', BOTH = 'Call + push', PUSH = 'Project stuck - push it', NOSTATE = 'No state';
 var NUMF = ['Score', 'Open rows', 'Call now', 'Call + push', 'Push stuck', 'Harsh words', 'Wrote 3+ times', 'Waiting > 24 h', 'Pending chats',
@@ -254,9 +276,8 @@ async function init() {
   document.getElementById('dump-lbl').textContent = 'Freshchat dump up to ' + dt(d.dumpAt);
   var sb = document.getElementById('sheet-btn'); if (d.sheetUrl) sb.href = d.sheetUrl; else sb.style.display = 'none';
   try { var v = localStorage.getItem('ews-view'); if (v && document.getElementById('p-' + v)) S.view = v; } catch (e) { /* storage blocked */ }
-  if (S.state && stateNames().indexOf(S.state) === -1) S.state = '';
-  if (S.cluster && !clusterRows().some(function (r) { return r.Name === S.cluster; })) S.cluster = '';
-  fillPickers();
+  loadScope();
+  renderFilterBar();
   document.getElementById('loading').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   renderAll();
@@ -264,17 +285,114 @@ async function init() {
 }
 function clusterRows() { return S.d.A.filter(function (r) { return r.Level === 'Cluster'; }); }
 function stateNames() { var s = {}; clusterRows().forEach(function (r) { s[r.State] = 1; }); return Object.keys(s).sort(function (a, b) { return a === NOSTATE ? 1 : b === NOSTATE ? -1 : a.localeCompare(b); }); }
-function fillPickers() {
-  var ss = document.getElementById('state-sel'), cs = document.getElementById('cluster-sel');
-  ss.style.display = hasStates() ? '' : 'none';
-  ss.innerHTML = '<option value="">All states</option>' + stateNames().map(function (s) { return '<option' + (s === S.state ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('');
-  var cl = clusterRows().filter(function (r) { return !S.state || r.State === S.state; }).map(function (r) { return r.Name; }).sort();
-  cs.innerHTML = '<option value="">' + (S.state ? 'All of ' + esc(S.state) : 'All clusters') + '</option>' + cl.map(function (c) { return '<option' + (c === S.cluster ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('');
+/* ---------- State / Cluster multi-select filter (the Referral Dashboard's multi-city picker) ---------- */
+function loadScope() {
+  var o = {};
+  try { o = JSON.parse(localStorage.getItem('ews-scope') || '{}') || {}; } catch (e) { o = {}; }
+  var st = stateNames(), cl = clusterRows().map(function (r) { return r.Name; });
+  S.states = (o.states || []).filter(function (s) { return st.indexOf(s) !== -1; });
+  S.clusters = (o.clusters || []).filter(function (c) { return cl.indexOf(c) !== -1; });
 }
+function saveScope() { try { localStorage.setItem('ews-scope', JSON.stringify({ states: S.states, clusters: S.clusters })); } catch (e) { /* storage blocked */ } }
+function renderFilterBar() {
+  var h = '<span class="fl">Filter</span>' + (hasStates() ? msHtml('state') : '') + msHtml('cluster');
+  if (S.states.length || S.clusters.length) h += '<button class="clr" onclick="setScope([],[])">Clear filters</button>';
+  document.getElementById('fbar').innerHTML = h;
+}
+/** Picker options: every State; for Cluster only the clusters of the picked States (grouped by State). */
+function msOptions(kind) {
+  if (kind === 'state') return stateNames().map(function (s) { return { v: s, g: '' }; });
+  return clusterRows().filter(function (r) { return !S.states.length || S.states.indexOf(r.State) !== -1; })
+    .map(function (r) { return { v: r.Name, g: hasStates() ? r.State : '' }; })
+    .sort(function (a, b) { return (a.g + '|' + a.v).localeCompare(b.g + '|' + b.v); });
+}
+function msHtml(kind) {
+  var sel = kind === 'state' ? S.states : S.clusters, lb = kind === 'state' ? 'State' : 'Cluster';
+  var all = kind === 'state' ? 'All states' : S.states.length ? 'All in ' + (S.states.length === 1 ? S.states[0] : S.states.length + ' states') : 'All clusters';
+  var vl = !sel.length ? all : sel.length === 1 ? sel[0] : sel.length + ' selected';
+  return '<div class="ms"><button class="ms-btn' + (sel.length ? ' on' : '') + '" onclick="msOpen(event,\'' + kind + '\')" title="' + esc(sel.join(', ')) + '">' +
+    '<span class="lb">' + lb + '</span><span class="vl">' + esc(vl) + '</span><span class="ar">&#9662;</span></button>' +
+    '<div class="ms-dd" id="dd-' + kind + '" onclick="event.stopPropagation()"></div></div>';
+}
+function msOpen(ev, kind) {
+  ev.stopPropagation();
+  var dd = document.getElementById('dd-' + kind), was = dd.classList.contains('open');
+  msCloseAll();
+  if (was) return;
+  S.tmp[kind] = (kind === 'state' ? S.states : S.clusters).slice();
+  var last = null, list = '';
+  msOptions(kind).forEach(function (o) {
+    if (o.g && o.g !== last) { list += '<div class="ms-grp" data-g="' + esc(o.g) + '">' + esc(o.g) + '</div>'; last = o.g; }
+    list += '<label class="ms-opt" data-g="' + esc(o.g) + '"><input type="checkbox" value="' + esc(o.v) + '"' + (S.tmp[kind].indexOf(o.v) !== -1 ? ' checked' : '') +
+      ' onchange="msTick(\'' + kind + '\',this.value,this.checked)">' + esc(o.v) + '</label>';
+  });
+  dd.innerHTML = '<div class="ms-search"><input type="text" placeholder="Search ' + (kind === 'state' ? 'states' : 'clusters') + '" oninput="msSearch(\'' + kind + '\',this.value)"></div>' +
+    '<label class="ms-all"><input type="checkbox" onchange="msAll(\'' + kind + '\',this.checked)"> Select all shown</label>' +
+    '<div class="ms-list">' + (list || '<div class="ms-grp">Nothing to pick</div>') + '</div>' +
+    '<div class="ms-foot"><span class="cnt"></span><button class="btn" onclick="msClear(\'' + kind + '\')">Clear</button><button class="btn pri" onclick="msApply(\'' + kind + '\')">Apply</button></div>';
+  dd.classList.add('open');
+  msCount(kind);
+  var inp = dd.querySelector('.ms-search input');
+  if (inp && window.innerWidth > 700) inp.focus();
+}
+function msCloseAll() { document.querySelectorAll('.ms-dd.open').forEach(function (d) { d.classList.remove('open'); }); }
+function msCount(kind) {
+  var dd = document.getElementById('dd-' + kind), k = S.tmp[kind].length;
+  dd.querySelector('.cnt').textContent = k ? k + ' selected' : 'None picked = all';
+  var vis = Array.prototype.filter.call(dd.querySelectorAll('.ms-opt'), function (l) { return l.style.display !== 'none'; });
+  dd.querySelector('.ms-all input').checked = vis.length > 0 && vis.every(function (l) { return l.querySelector('input').checked; });
+}
+function msTick(kind, v, on) {
+  var a = S.tmp[kind], i = a.indexOf(v);
+  if (on && i === -1) a.push(v); else if (!on && i !== -1) a.splice(i, 1);
+  msCount(kind);
+}
+function msSearch(kind, q) {
+  var dd = document.getElementById('dd-' + kind), shown = {};
+  q = q.toLowerCase();
+  dd.querySelectorAll('.ms-opt').forEach(function (l) {
+    var ok = !q || l.textContent.toLowerCase().indexOf(q) !== -1 || l.getAttribute('data-g').toLowerCase().indexOf(q) !== -1;
+    l.style.display = ok ? '' : 'none';
+    if (ok) shown[l.getAttribute('data-g')] = 1;
+  });
+  dd.querySelectorAll('.ms-grp[data-g]').forEach(function (g) { g.style.display = shown[g.getAttribute('data-g')] ? '' : 'none'; });
+  msCount(kind);
+}
+function msAll(kind, on) {
+  document.getElementById('dd-' + kind).querySelectorAll('.ms-opt').forEach(function (l) {
+    if (l.style.display === 'none') return;
+    var c = l.querySelector('input');
+    c.checked = on;
+    msTick(kind, c.value, on);
+  });
+}
+function msClear(kind) { S.tmp[kind] = []; msApply(kind); }
+function msApply(kind) {
+  msCloseAll();
+  var sel = S.tmp[kind].slice();
+  if (kind === 'state') {
+    var ok = clusterRows().filter(function (r) { return !sel.length || sel.indexOf(r.State) !== -1; }).map(function (r) { return r.Name; });
+    setScope(sel, S.clusters.filter(function (c) { return ok.indexOf(c) !== -1; }));   // clusters outside the new States drop out
+  } else setScope(S.states, sel);
+}
+document.addEventListener('click', msCloseAll);
 
-/* ---------- scope: India / State / Cluster ---------- */
-function scope() { return S.cluster ? { kind: 'cluster', name: S.cluster } : S.state ? { kind: 'state', name: S.state } : { kind: 'india', name: 'All India' }; }
-function inScope(p) { return S.cluster ? p.cl === S.cluster : S.state ? p.state === S.state : true; }
+/* ---------- scope: India / States / Clusters (both multi-select) ---------- */
+function selClusters() {
+  if (S.clusters.length) return S.clusters;
+  if (S.states.length) return clusterRows().filter(function (r) { return S.states.indexOf(r.State) !== -1; }).map(function (r) { return r.Name; });
+  return null;
+}
+function clusterIn(name) { var c = selClusters(); return !c || c.indexOf(name) !== -1; }
+function inScope(p) { return clusterIn(p.cl); }
+function listName(a, word) { return a.length <= 2 ? a.join(' + ') : a.length + ' ' + word; }
+function scope() {
+  if (S.clusters.length === 1) return { kind: 'cluster', name: S.clusters[0] };
+  if (S.clusters.length > 1) return { kind: 'clusters', name: listName(S.clusters, 'clusters') };
+  if (S.states.length === 1) return { kind: 'state', name: S.states[0] };
+  if (S.states.length > 1) return { kind: 'states', name: listName(S.states, 'states') };
+  return { kind: 'india', name: 'All India' };
+}
 function signed(x) { return x > 0 ? '+' + x : String(x); }
 function doFirst(x) {
   var parts = [];
@@ -284,44 +402,59 @@ function doFirst(x) {
   var t = parts.length ? parts.join(', then ') : (x.pending ? 'reply ' + x.pending + ' new chat' + (x.pending > 1 ? 's' : '') + ' today' : 'on track');
   return t.charAt(0).toUpperCase() + t.slice(1);
 }
-/** A State row: the sum of its clusters (same rules as the sheet's cluster rows). */
-function stateRow(name) {
-  var rows = clusterRows().filter(function (r) { return r.State === name; }), o = { Level: 'State', Name: name, Cluster: '' };
+/** A row for a set of clusters (a State, or what is picked): sums of the clusters, same rules as the sheet. */
+function aggRow(name, level, names) {
+  var rows = clusterRows().filter(function (r) { return names.indexOf(r.Name) !== -1; }), o = { Level: level, Name: name, Cluster: '' };
   NUMF.forEach(function (k) { o[k] = sum(rows, k); });
   var olds = rows.map(function (r) { return r['Oldest wait (days)']; }).filter(function (v) { return v !== '' && v != null; });
   o['Oldest wait (days)'] = olds.length ? Math.max.apply(null, olds.map(n)) : '';
   var st = {};
-  S.d.P.forEach(function (p) { if (p.state === name && p.open && /push/.test(p.act)) { var s = p.stage || '(no stage)'; st[s] = (st[s] || 0) + 1; } });
+  S.d.P.forEach(function (p) { if (names.indexOf(p.cl) !== -1 && p.open && /push/.test(p.act)) { var s = p.stage || '(no stage)'; st[s] = (st[s] || 0) + 1; } });
   var top = Object.keys(st).sort(function (a, b) { return st[b] - st[a]; })[0];
   o['Most stuck at'] = top ? top + ' (' + st[top] + ')' : '';
   o['Do first'] = doFirst({ call: o['Call now'], harsh: o['Harsh words'], wait24: o['Waiting > 24 h'], push: o['Push stuck'], pending: o['Pending chats'] });
   var hasY = rows.some(function (r) { return r['Call now yesterday'] !== '' && r['Call now yesterday'] != null; });
   var dc = o['Call now'] - o['Call now yesterday'], dw = o['Waiting > 24 h'] - o['Waiting > 24 h yesterday'];
   o['vs yesterday'] = !hasY ? '-' : dc === 0 && dw === 0 ? 'Same as yesterday' : 'Call ' + signed(dc) + ', waiting ' + signed(dw);
-  o.State = name;
+  o.State = level === 'State' ? name : '';
   return o;
 }
+function stateRow(name) { return aggRow(name, 'State', clusterRows().filter(function (r) { return r.State === name; }).map(function (r) { return r.Name; })); }
 function stateRows() { return stateNames().map(stateRow).sort(function (a, b) { return b.Score - a.Score; }); }
+function byScore(a, b) { return n(b.Score) - n(a.Score); }
 function scopeRow() {
   var sc = scope(), A = S.d.A;
   if (sc.kind === 'india') return A.find(function (x) { return x.Level === 'India'; }) || {};
+  if (sc.kind === 'cluster') return A.find(function (x) { return x.Level === 'Cluster' && x.Name === sc.name; }) || { Name: sc.name };
   if (sc.kind === 'state') return stateRow(sc.name);
-  return A.find(function (x) { return x.Level === 'Cluster' && x.Name === sc.name; }) || { Name: sc.name };
+  return aggRow(sc.name, 'Group', selClusters());
 }
-/** Rows one level down: India -> states (or clusters), state -> its clusters, cluster -> its cells. */
+/** Rows one level down: India -> States; several States -> those States; a State or several clusters -> clusters; one cluster -> its cells. */
 function childRows() {
   var sc = scope();
   if (sc.kind === 'india') return hasStates() ? stateRows() : clusterRows();
-  if (sc.kind === 'state') return clusterRows().filter(function (r) { return r.State === sc.name; });
-  return S.d.A.filter(function (x) { return x.Level === 'Cell' && x.Cluster === sc.name; });
+  if (sc.kind === 'states') return stateRows().filter(function (s) { return S.states.indexOf(s.Name) !== -1; });
+  if (sc.kind === 'cluster') return S.d.A.filter(function (x) { return x.Level === 'Cell' && x.Cluster === sc.name; });
+  return clusterRows().filter(function (r) { return clusterIn(r.Name); }).sort(byScore);
 }
-function childLabel() { var sc = scope(); return sc.kind === 'india' ? (hasStates() ? 'State' : 'Cluster') : sc.kind === 'state' ? 'Cluster in ' + sc.name : 'Cell in ' + sc.name; }
-function drill(r) { return r.Level === 'State' ? 'setState(' + js(r.Name) + ')' : r.Level === 'Cluster' ? 'setCluster(' + js(r.Name) + ')' : ''; }
+function childLabel() {
+  var sc = scope();
+  return sc.kind === 'india' ? (hasStates() ? 'State' : 'Cluster') : sc.kind === 'states' ? 'State' : sc.kind === 'state' ? 'Cluster in ' + sc.name :
+    sc.kind === 'clusters' ? 'Cluster' : 'Cell in ' + sc.name;
+}
+function drill(r) { return r.Level === 'State' ? 'pickState(' + js(r.Name) + ')' : r.Level === 'Cluster' ? 'pickCluster(' + js(r.Name) + ')' : ''; }
+function pickState(s) { setScope([s], []); }
+function pickCluster(c) {
+  var st = S.states.slice(), r = clusterRows().find(function (x) { return x.Name === c; });
+  if (!st.length && r && hasStates() && r.State !== NOSTATE) st = [r.State];
+  setScope(st, [c]);
+}
 function crumb() {
-  var sc = scope(), h = '<div class="crumb">';
-  h += sc.kind === 'india' ? '<span class="cur">All India</span>' : '<a onclick="setState(\'\')">All India</a>';
-  if (S.state) h += ' &rsaquo; ' + (sc.kind === 'state' ? '<span class="cur">' + esc(S.state) + '</span>' : '<a onclick="setCluster(\'\')">' + esc(S.state) + '</a>');
-  if (S.cluster) h += ' &rsaquo; <span class="cur">' + esc(S.cluster) + '</span>';
+  var h = '<div class="crumb">';
+  if (!S.states.length && !S.clusters.length) return h + '<span class="cur">All India</span></div>';
+  h += '<a onclick="setScope([],[])">All India</a>';
+  if (S.states.length) h += ' &rsaquo; ' + (S.clusters.length ? '<a onclick="setScope(S.states,[])">' + esc(S.states.join(', ')) + '</a>' : '<span class="cur">' + esc(S.states.join(', ')) + '</span>');
+  if (S.clusters.length) h += ' &rsaquo; <span class="cur">' + esc(S.clusters.join(', ')) + '</span>';
   return h + '</div>';
 }
 
@@ -334,10 +467,10 @@ function sw(v) {
   document.getElementById('main').scrollTop = 0;
   if (v === 'trend' || v === 'pending') setTimeout(function () { renderCharts(v); }, 0);
 }
-function setState(s) { S.state = s; S.cluster = ''; S.more = {}; S.f.cell = 'All'; fillPickers(); renderAll(); if (S.view === 'pending') renderCharts('pending'); }
-function setCluster(c) {
-  if (c) { var r = clusterRows().find(function (x) { return x.Name === c; }); if (r && hasStates()) S.state = r.State === NOSTATE ? S.state : r.State; }
-  S.cluster = c; S.more = {}; S.f.cell = 'All'; fillPickers(); renderAll(); if (S.view === 'pending') renderCharts('pending');
+function setScope(states, clusters) {
+  S.states = states.slice(); S.clusters = clusters.slice(); S.more = {}; S.f.cell = 'All';
+  saveScope(); renderFilterBar(); renderAll();
+  if (S.view === 'pending') renderCharts('pending');
 }
 function openList(f) { S.f = Object.assign({ seg: 'all', why: 'All', cell: 'All', wait: 'All', q: '' }, f); S.more = {}; renderList(); sw('list'); }
 function renderAll() { renderBoard(); renderList(); renderClusters(); renderPending(); renderTrend(); renderAbout(); }
@@ -500,7 +633,7 @@ function renderListBody() {
   document.getElementById('list-body').innerHTML = h || '<div class="card empty">No Project IDs match these filters.</div>';
 }
 function rowCard(p, s, sc) {
-  var where = [sc.kind === 'india' ? p.cl : '', p.cell, p.city && p.city !== p.cl ? p.city : ''].filter(Boolean).join(' &middot; ');
+  var where = [sc.kind !== 'cluster' ? p.cl : '', p.cell, p.city && p.city !== p.cl ? p.city : ''].filter(Boolean).join(' &middot; ');
   var tags = (p.act === BOTH ? '<span class="tag both">Call + push</span>' : '') +
     (p.why || []).map(function (w) { return '<span class="tag' + (w === 'harsh' ? ' harsh' : '') + '">' + esc(WHYL(w)) + '</span>'; }).join('') +
     (p.nfc ? '<span class="tag nfc">Not in Freshchat</span>' : '');
@@ -541,18 +674,20 @@ function renderClusters() {
     { h: 'Open rows', num: 1, v: function (x) { return n(x['Open rows']); } },
     { h: 'vs yesterday', v: function (x) { return x['vs yesterday']; } }
   ];
-  var rows;
+  var rows, any = S.states.length || S.clusters.length;
   if (hasStates() && !S.sort['t-cl']) {
     rows = [];
-    stateRows().filter(function (s) { return !S.state || s.Name === S.state; }).forEach(function (s) {
-      rows.push(s);
-      clusterRows().filter(function (c) { return c.State === s.Name; }).sort(function (a, b) { return n(b.Score) - n(a.Score); }).forEach(function (c) { rows.push(c); });
+    stateRows().forEach(function (s) {
+      var cl = clusterRows().filter(function (c) { return c.State === s.Name && clusterIn(c.Name); }).sort(byScore);
+      if (!cl.length) return;
+      rows.push(S.clusters.length ? aggRow(s.Name, 'State', cl.map(function (c) { return c.Name; })) : s);
+      cl.forEach(function (c) { rows.push(c); });
     });
-  } else rows = clusterRows().filter(function (c) { return !S.state || c.State === S.state; });
+  } else rows = clusterRows().filter(function (c) { return clusterIn(c.Name); });
   document.getElementById('p-clusters').innerHTML = crumb() + '<div class="ptitle">' + (hasStates() ? 'States and clusters' : 'Clusters') + ' - where to act</div>' +
     '<div class="psub">' + (hasStates() ? 'States worst first, each with its clusters. State from Dilip\'s FC_Data (City to State). ' : '') + 'Click a row to open its day; click a column to sort.</div>' + legend() +
-    table('t-cl', cols, rows, { top: S.state ? [] : india, freeze: true, rowClass: function (x) { return x.Level === 'State' ? 'grp' : ''; },
-      click: function (x) { return x.Level === 'India' ? "setState('');sw('board')" : drill(x) + ";sw('board')"; } });
+    table('t-cl', cols, rows, { top: any ? [] : india, freeze: true, rowClass: function (x) { return x.Level === 'State' ? 'grp' : ''; },
+      click: function (x) { return x.Level === 'India' ? "setScope([],[]);sw('board')" : drill(x) + ";sw('board')"; } });
 }
 
 /* ---------- Pending chats ---------- */
@@ -565,7 +700,7 @@ function addArr(rows, k, len) { var t = new Array(len).fill(0); rows.forEach(fun
 function pendScope() {
   var pr = pendRows(), sc = scope();
   if (sc.kind === 'india') return pr.india || { a: [], b: [] };
-  var rows = pr.clusters.filter(function (r) { return sc.kind === 'state' ? r.state === sc.name : r.name === sc.name; });
+  var rows = pr.clusters.filter(function (r) { return clusterIn(r.name); });
   return { name: sc.name, a: addArr(rows, 'a', 14), b: addArr(rows, 'b', 12) };
 }
 function renderPending() {
@@ -581,14 +716,14 @@ function renderPending() {
     mc('Not replied', b[3], fmt(w24(b, 4)) + ' waiting over 24 h') + mc('Not replied 7+ days', b[11], 'oldest bucket') + '</div>';
   h += '<div class="card"><div class="ctitle">Waiting by age &middot; ' + esc(sc.name) + '</div><div class="cwrap"><canvas id="ch-age"></canvas></div></div>';
   var rows, lab;
-  if (sc.kind === 'india' && hasStates()) {
+  if ((sc.kind === 'india' || sc.kind === 'states') && hasStates()) {
     lab = 'State';
     var st = {};
-    pr.clusters.forEach(function (r) { (st[r.state] = st[r.state] || []).push(r); });
+    pr.clusters.forEach(function (r) { if (sc.kind === 'states' && S.states.indexOf(r.state) === -1) return; (st[r.state] = st[r.state] || []).push(r); });
     rows = Object.keys(st).map(function (s) { return { name: s, level: 'State', a: addArr(st[s], 'a', 14), b: addArr(st[s], 'b', 12) }; }).sort(function (x, y) { return y.a[3] - x.a[3]; });
   } else {
-    lab = sc.kind === 'india' ? 'Cluster' : 'Cluster in ' + (S.state || sc.name);
-    rows = pr.clusters.filter(function (r) { return sc.kind === 'india' || (S.state ? r.state === S.state : r.name === sc.name); });
+    lab = sc.kind === 'india' ? 'Cluster' : sc.kind === 'state' ? 'Cluster in ' + sc.name : 'Cluster';
+    rows = pr.clusters.filter(function (r) { return clusterIn(r.name); });
   }
   var cols = [
     { h: lab, v: function (x) { return x.name; }, html: function (x) { return '<b>' + esc(x.name) + '</b>'; } },
@@ -608,7 +743,7 @@ function renderPending() {
   ]);
   h += '<div class="stitle">By ' + esc(lab.split(' ')[0].toLowerCase()) + '<span class="hint">CD = Commissioning Dashboard</span></div>' +
     table('t-pend', cols, rows, { top: sc.kind === 'india' ? [pr.india] : [], freeze: true,
-      click: function (x) { return x.level === 'State' ? 'setState(' + js(x.name) + ')' : x === pr.india ? '' : 'setCluster(' + js(x.name) + ')'; } });
+      click: function (x) { return x.level === 'State' ? 'pickState(' + js(x.name) + ')' : x === pr.india ? '' : 'pickCluster(' + js(x.name) + ')'; } });
   if (P.why && P.why.length && sc.kind === 'india') h += '<div class="stitle">Why the two views differ<span class="hint">India, customers in the date range</span></div><div class="card">' +
     P.why.map(function (w) { var sub = /^\s/.test(w[0]); return '<div class="why-row' + (sub ? ' sub' : '') + '"><span>' + esc(String(w[0]).trim()) + '</span><span class="mono">' + fmt(w[1]) + '</span></div>'; }).join('') + '</div>';
   document.getElementById('p-pending').innerHTML = h;
@@ -619,7 +754,7 @@ function pct(a, b) { return n(b) ? Math.round(100 * n(a) / n(b)) + '%' : '-'; }
 /* ---------- Trend ---------- */
 function renderTrend() {
   var d = S.d, types = d.msgTypes || [], tot = types.reduce(function (t, x) { return t + n(x[1]); }, 0);
-  document.getElementById('p-trend').innerHTML = '<div class="ptitle">Trend &middot; All India</div><div class="psub">One point a day from the sheet\'s History tab (open rows at the end of each day).</div>' +
+  document.getElementById('p-trend').innerHTML = '<div class="ptitle">Trend &middot; All India</div><div class="psub">One point a day from the sheet\'s History tab (open rows at the end of each day). India-wide: the State and Cluster filters do not apply here.</div>' +
     (d.T.length < 2 ? '<div class="srcwarn show">The trend fills one point a day; it started on ' + esc(d.T.length ? dOnly(d.T[0].Date) : 'the first night') + '.</div>' : '') +
     '<div class="card"><div class="ctitle">Open on the list, call the customer, project stuck</div><div class="cwrap"><canvas id="ch-trend"></canvas></div></div>' +
     '<div class="twocol"><div class="card"><div class="ctitle">What they wrote about (' + fmt(tot) + ' open rows, rough tag from words)</div><div class="cwrap" style="height:' + Math.max(160, types.length * 28) + 'px"><canvas id="ch-types"></canvas></div></div>' +
