@@ -233,6 +233,11 @@ th.sort-asc::after{content:' \2191';color:var(--bl)}th.sort-desc::after{content:
 var S = { d: null, states: [], clusters: [], tmp: {}, view: 'board', charts: {}, sort: {}, more: {},
   f: { seg: 'all', why: 'All', cell: 'All', wait: 'All', q: '' } };
 var CALL = 'Call the customer', BOTH = 'Call + push', PUSH = 'Project stuck - push it', NOSTATE = 'No state';
+// The data keeps the names from before "push" became "expedite" (16 Oct); people see the new words.
+var ACT_LABEL = {}; ACT_LABEL[BOTH] = 'Call + expedite'; ACT_LABEL[PUSH] = 'Project stuck - expedite';
+var ACT_DATA = {}; ACT_DATA[ACT_LABEL[BOTH]] = BOTH; ACT_DATA[ACT_LABEL[PUSH]] = PUSH;
+var HEAD_DATA = { 'Call + expedite': 'Call + push', 'Expedite stuck': 'Push stuck' };
+function actLabel(a) { return ACT_LABEL[a] || a; }
 var NUMF = ['Score', 'Open rows', 'Call now', 'Call + push', 'Push stuck', 'Harsh words', 'Wrote 3+ times', 'Waiting > 24 h', 'Pending chats',
   'Not in Freshchat data', 'Wrote after the dump', 'Call now yesterday', 'Waiting > 24 h yesterday'];
 
@@ -257,8 +262,12 @@ async function load() {
   if (!r.ok) throw new Error(r.status === 404 ? 'No data yet. The Ops sheet sends it after its next pull (or run pushDashboard in the script).' : 'Could not load the data (HTTP ' + r.status + ').');
   var d = await r.json();
   d.states = d.states || {};
-  d.A = rowsOf(d.actionHead, d.action);
+  d.A = rowsOf(d.actionHead.map(function (h) { return HEAD_DATA[h] || h; }), d.action);
   d.P = rowsOf(d.projectHead, d.projects);
+  d.P.forEach(function (p) { p.act = ACT_DATA[p.act] || p.act; });   // data sent in the new words still matches
+  d.A.forEach(function (r) {                                          // "Do first" saved before 16 Oct says "push"
+    if (typeof r['Do first'] === 'string') r['Do first'] = r['Do first'].replace(/\b([Pp])ush (\d+) stuck project/g, function (m, p, k) { return (p === 'P' ? 'E' : 'e') + 'xpedite ' + k + ' stuck project'; });
+  });
   d.T = rowsOf(d.trendHead || [], d.trend || []);
   d.P.forEach(function (p) { p.state = stateOf(p.cl, d); });
   d.A.forEach(function (r) { r.State = stateOf(r.Level === 'Cluster' ? r.Name : r.Cluster, d); });
@@ -398,7 +407,7 @@ function doFirst(x) {
   var parts = [];
   if (x.call) parts.push('call ' + x.call + (x.harsh ? ' (' + x.harsh + ' with harsh words)' : ''));
   if (x.wait24) parts.push('reply ' + x.wait24 + ' waiting on Freshchat');
-  if (x.push) parts.push('push ' + x.push + ' stuck project' + (x.push > 1 ? 's' : ''));
+  if (x.push) parts.push('expedite ' + x.push + ' stuck project' + (x.push > 1 ? 's' : ''));
   var t = parts.length ? parts.join(', then ') : (x.pending ? 'reply ' + x.pending + ' new chat' + (x.pending > 1 ? 's' : '') + ' today' : 'on track');
   return t.charAt(0).toUpperCase() + t.slice(1);
 }
@@ -510,9 +519,9 @@ function renderBoard() {
   var d = S.d, r = scopeRow(), L = d.links || {}, sc = scope();
   var pend = n(r['Pending chats']), old = r['Oldest wait (days)'];
   var cards = [
-    { k: 'c-call', t: '1 &middot; Call now', v: r['Call now'], sub: fmt(r['Call + push']) + ' of them also need the project pushed (Call + push)',
+    { k: 'c-call', t: '1 &middot; Call now', v: r['Call now'], sub: fmt(r['Call + push']) + ' of them also need the project expedited (Call + expedite)',
       who: 'Who: CX / chat team - call or WhatsApp with a real answer', list: "openList({seg:'call'})", sheet: L.call },
-    { k: 'c-push', t: '2 &middot; Push stuck projects', v: r['Push stuck'], sub: r['Most stuck at'] ? 'Most stuck at ' + esc(r['Most stuck at']) : 'Projects to push',
+    { k: 'c-push', t: '2 &middot; Expedite stuck projects', v: r['Push stuck'], sub: r['Most stuck at'] ? 'Most stuck at ' + esc(r['Most stuck at']) : 'Projects to expedite',
       who: 'Who: Ops cell - clear the step the project is stuck at', list: "openList({seg:'push'})", sheet: L.push },
     { k: 'c-reply', t: '3 &middot; Reply on Freshchat', v: r['Waiting > 24 h'], sub: pend ? 'Chats waiting over 24 h - oldest ' + fmt(old) + ' days, ' + fmt(pend) + ' pending in all' : 'No chats pending now',
       who: 'Who: Freshchat agents - reply on the chat', list: "openList({seg:'reply',wait:'24'})", sheet: L.reply },
@@ -534,7 +543,7 @@ function renderBoard() {
     table('t-where', [
       { h: lab, v: function (x) { return x.Name; }, html: function (x) { return '<b>' + esc(x.Name) + '</b>' + (x.Level === 'Cluster' && sc.kind === 'india' ? '' : ''); } },
       { h: 'Call now', num: 1, v: function (x) { return n(x['Call now']); }, heat: heatCall },
-      { h: 'Push stuck', num: 1, v: function (x) { return n(x['Push stuck']); }, heat: heatPush },
+      { h: 'Expedite stuck', num: 1, v: function (x) { return n(x['Push stuck']); }, heat: heatPush },
       { h: 'Waiting > 24 h', num: 1, v: function (x) { return n(x['Waiting > 24 h']); } },
       { h: 'Harsh words', num: 1, v: function (x) { return n(x['Harsh words']); }, heat: heatHarsh },
       oldCol(),
@@ -546,7 +555,7 @@ function renderBoard() {
   document.getElementById('p-board').innerHTML = h;
 }
 function stat(v, l) { return '<div><div class="fys-v">' + fmt(v) + '</div><div class="fys-l">' + esc(l) + '</div></div>'; }
-function legend() { return '<div class="legend"><span><i style="background:#fee2e2"></i>Call now / waited 7+ days</span><span><i style="background:#fef3c7"></i>Push stuck / waited 2+ days</span><span><i style="background:#7f1d1d"></i>Harsh words</span><span><i style="background:#f3e8ff"></i>Wrote on WhatsApp, not in Freshchat data</span></div>'; }
+function legend() { return '<div class="legend"><span><i style="background:#fee2e2"></i>Call now / waited 7+ days</span><span><i style="background:#fef3c7"></i>Expedite stuck / waited 2+ days</span><span><i style="background:#7f1d1d"></i>Harsh words</span><span><i style="background:#f3e8ff"></i>Wrote on WhatsApp, not in Freshchat data</span></div>'; }
 function staleWarn() { var h = hrs(S.d.savedAt); return h > 26 ? '<div class="srcwarn show"><b>Old data:</b> the sheet last sent data ' + dt(S.d.savedAt) + ' (' + ago(S.d.savedAt) + '). Check the Run log in the sheet.</div>' : ''; }
 function alerts(rows) {
   var out = [], what = childLabel().split(' ')[0].toLowerCase() + 's';
@@ -565,7 +574,7 @@ function alerts(rows) {
 var WHYL = function (w) { var R = S.d.rules; return { harsh: 'Harsh words', wrote: 'Wrote ' + R.repeatTimes + '+ in ' + R.repeatDays + ' days', installed: 'Installed ' + R.installedDays + '+ days', seeking: 'Seeking cancellation', replied: 'Replied, still stuck' }[w] || w; };
 var SECS = [
   { k: 'call', t: 'Call the customer', dot: '#c5221f', cls: 'a-call', who: 'CX / chat team', test: function (p) { return /^Call/.test(p.act); }, sort: 'new' },
-  { k: 'push', t: 'Push the project', dot: '#d97706', cls: 'a-push', who: 'Ops cell', test: function (p) { return p.act === PUSH; }, sort: 'new' },
+  { k: 'push', t: 'Expedite the project', dot: '#d97706', cls: 'a-push', who: 'Ops cell', test: function (p) { return p.act === PUSH; }, sort: 'new' },
   { k: 'reply', t: 'Waiting for a reply on Freshchat', dot: '#1a56db', cls: 'a-reply', who: 'Freshchat agents', test: function (p) { return !p.act && p.age != null; }, sort: 'old' },
   { k: 'nfc', t: 'Wrote on WhatsApp, not in Freshchat', dot: '#8b5cf6', cls: 'a-nfc', who: 'Call them directly', test: function (p) { return !p.act && p.age == null && p.nfc; }, sort: 'new' },
   { k: 'other', t: 'On the list, nothing to do now', dot: '#9b9b90', cls: '', who: '', test: function (p) { return !p.act && p.age == null && !p.nfc; }, sort: 'new' }
@@ -597,7 +606,7 @@ function setF(k, v) { S.f[k] = v; S.more = {}; if (k === 'q') renderListBody(); 
 function renderList() {
   var d = S.d, f = S.f, base = baseList(), sc = scope();
   var cells = Array.from(new Set(d.P.filter(inScope).map(function (p) { return p.cell; }).filter(Boolean))).sort();
-  var segs = [['all', 'Everyone'], ['call', 'Call'], ['push', 'Push'], ['reply', 'Waiting for reply'], ['nfc', 'Not in Freshchat']];
+  var segs = [['all', 'Everyone'], ['call', 'Call'], ['push', 'Expedite'], ['reply', 'Waiting for reply'], ['nfc', 'Not in Freshchat']];
   var opt = function (k, list) { return list.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (String(f[k]) === String(o[0]) ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join(''); };
   var h = crumb() + '<div class="ptitle">Customer list &middot; ' + esc(sc.name) + '</div>' +
     '<div class="psub">Project IDs to act on, grouped by what to do. Names, phones and messages are in the Google Sheet.</div>' +
@@ -634,7 +643,7 @@ function renderListBody() {
 }
 function rowCard(p, s, sc) {
   var where = [sc.kind !== 'cluster' ? p.cl : '', p.cell].filter(Boolean).join(' &middot; ');
-  var tags = (p.act === BOTH ? '<span class="tag both">Call + push</span>' : '') +
+  var tags = (p.act === BOTH ? '<span class="tag both">' + esc(actLabel(BOTH)) + '</span>' : '') +
     (p.why || []).map(function (w) { return '<span class="tag' + (w === 'harsh' ? ' harsh' : '') + '">' + esc(WHYL(w)) + '</span>'; }).join('') +
     (p.nfc ? '<span class="tag nfc">Not in Freshchat</span>' : '');
   var wh = p.last ? hrs(p.last) : null, wcls = p.age == null ? '' : p.age >= 7 ? 'w3' : p.age >= 5 ? 'w2' : p.age >= 4 ? 'w1' : 'w0';
@@ -647,7 +656,7 @@ function rowCard(p, s, sc) {
 function downloadCsv() {
   var rows = listRows(), q = function (v) { v = String(v == null ? '' : v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
   var lines = [['Project ID', 'Action', 'Reason', 'Waiting', 'Last wrote', 'Last agent reply', 'State', 'Cluster', 'Cell', 'Stage', 'Days since installation', 'Message type', 'Status', 'Not in Freshchat data'].join(',')];
-  rows.forEach(function (p) { lines.push([p.id, p.act, (p.why || []).map(WHYL).join('; '), p.age == null ? '' : (S.d.ageLabels || [])[p.age], p.last ? dt(p.last) : '', p.reply ? dt(p.reply) : '', p.state === NOSTATE ? '' : p.state, p.cl, p.cell, p.stage, p.inst == null ? '' : p.inst, p.mt, p.st, p.nfc ? 'Yes' : ''].map(q).join(',')); });
+  rows.forEach(function (p) { lines.push([p.id, actLabel(p.act), (p.why || []).map(WHYL).join('; '), p.age == null ? '' : (S.d.ageLabels || [])[p.age], p.last ? dt(p.last) : '', p.reply ? dt(p.reply) : '', p.state === NOSTATE ? '' : p.state, p.cl, p.cell, p.stage, p.inst == null ? '' : p.inst, p.mt, p.st, p.nfc ? 'Yes' : ''].map(q).join(',')); });
   var a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' }));
   a.download = 'ews-project-ids-' + scope().name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.csv';
@@ -661,8 +670,8 @@ function renderClusters() {
     { h: hasStates() ? 'State / cluster' : 'Cluster', v: function (x) { return x.Level === 'India' ? 'All India' : x.Name; }, html: function (x) { return x.Level === 'Cluster' && hasStates() && !S.sort['t-cl'] ? '&nbsp;&nbsp;&nbsp;' + esc(x.Name) : '<b>' + esc(x.Level === 'India' ? 'All India' : x.Name) + '</b>'; } },
     { h: 'Do first', v: function (x) { return x['Do first']; }, cls: 'do' },
     { h: 'Call now', num: 1, v: function (x) { return n(x['Call now']); }, heat: heatCall },
-    { h: 'Call + push', num: 1, v: function (x) { return n(x['Call + push']); } },
-    { h: 'Push stuck', num: 1, v: function (x) { return n(x['Push stuck']); }, heat: heatPush },
+    { h: 'Call + expedite', num: 1, v: function (x) { return n(x['Call + push']); } },
+    { h: 'Expedite stuck', num: 1, v: function (x) { return n(x['Push stuck']); }, heat: heatPush },
     { h: 'Most stuck at', v: function (x) { return x['Most stuck at']; } },
     { h: 'Harsh words', num: 1, v: function (x) { return n(x['Harsh words']); }, heat: heatHarsh },
     { h: 'Wrote ' + d.rules.repeatTimes + '+ times', num: 1, tip: 'in ' + d.rules.repeatDays + ' days', v: function (x) { return n(x['Wrote 3+ times']); } },
@@ -793,8 +802,8 @@ function renderAbout() {
     '<div class="card note">' +
     '<p><b>Who is on the list.</b> Installed, not yet commissioned, not cancelled or on hold, and wrote to us on WhatsApp after installation.</p>' +
     '<p><b>When we step in.</b> Harsh words (refund, consumer court, complaint, cancel, false promises and similar) - call the customer. ' +
-    'Wrote ' + R.repeatTimes + '+ times in ' + R.repeatDays + ' days - call the customer. Installed ' + R.installedDays + '+ days ago - push the project. ' +
-    'Seeking cancellation - push the project. If an agent replied but the project is still stuck, the row stays open.</p>' +
+    'Wrote ' + R.repeatTimes + '+ times in ' + R.repeatDays + ' days - call the customer. Installed ' + R.installedDays + '+ days ago - expedite the project. ' +
+    'Seeking cancellation - expedite the project. If an agent replied but the project is still stuck, the row stays open.</p>' +
     '<p><b>Pending chats.</b> A customer is pending when their last message (from ' + esc(dOnly(d.from)) + ' to today) has no agent reply after it in the Freshchat dump. ' +
     'Replies come from the daily Freshchat dump, so a reply can show up to a day late (dump up to ' + dt(d.dumpAt) + ').</p>' +
     '<p><b>Not in Freshchat data.</b> The customer wrote on WhatsApp but is not in the Freshchat data, so agents may not see the chat. Call them directly.</p>' +
