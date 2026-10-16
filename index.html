@@ -517,7 +517,7 @@ function renderBoard() {
     { k: 'c-reply', t: '3 &middot; Reply on Freshchat', v: r['Waiting > 24 h'], sub: pend ? 'Chats waiting over 24 h - oldest ' + fmt(old) + ' days, ' + fmt(pend) + ' pending in all' : 'No chats pending now',
       who: 'Who: Freshchat agents - reply on the chat', list: "openList({seg:'reply',wait:'24'})", sheet: L.reply },
     { k: 'c-harsh', t: '4 &middot; Harsh words', v: r['Harsh words'], sub: 'Customers to call today, before it becomes an escalation',
-      who: 'Who: CX lead / city Ops head', list: "openList({seg:'call',why:'harsh'})", sheet: L.harsh }
+      who: 'Who: CX lead / Ops head', list: "openList({seg:'call',why:'harsh'})", sheet: L.harsh }
   ];
   var h = crumb() + '<div class="ptitle">What to do today &middot; ' + esc(sc.name) + '</div>' +
     '<div class="psub">Pending chats from ' + esc(dOnly(d.from)) + ' to today. Sheet data saved ' + dt(d.savedAt) + ', Freshchat replies up to ' + dt(d.dumpAt) + '.</div>' +
@@ -633,7 +633,7 @@ function renderListBody() {
   document.getElementById('list-body').innerHTML = h || '<div class="card empty">No Project IDs match these filters.</div>';
 }
 function rowCard(p, s, sc) {
-  var where = [sc.kind !== 'cluster' ? p.cl : '', p.cell, p.city && p.city !== p.cl ? p.city : ''].filter(Boolean).join(' &middot; ');
+  var where = [sc.kind !== 'cluster' ? p.cl : '', p.cell].filter(Boolean).join(' &middot; ');
   var tags = (p.act === BOTH ? '<span class="tag both">Call + push</span>' : '') +
     (p.why || []).map(function (w) { return '<span class="tag' + (w === 'harsh' ? ' harsh' : '') + '">' + esc(WHYL(w)) + '</span>'; }).join('') +
     (p.nfc ? '<span class="tag nfc">Not in Freshchat</span>' : '');
@@ -646,8 +646,8 @@ function rowCard(p, s, sc) {
 }
 function downloadCsv() {
   var rows = listRows(), q = function (v) { v = String(v == null ? '' : v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-  var lines = [['Project ID', 'Action', 'Reason', 'Waiting', 'Last wrote', 'Last agent reply', 'State', 'Cluster', 'City', 'Cell', 'Stage', 'Days since installation', 'Message type', 'Status', 'Not in Freshchat data'].join(',')];
-  rows.forEach(function (p) { lines.push([p.id, p.act, (p.why || []).map(WHYL).join('; '), p.age == null ? '' : (S.d.ageLabels || [])[p.age], p.last ? dt(p.last) : '', p.reply ? dt(p.reply) : '', p.state === NOSTATE ? '' : p.state, p.cl, p.city, p.cell, p.stage, p.inst == null ? '' : p.inst, p.mt, p.st, p.nfc ? 'Yes' : ''].map(q).join(',')); });
+  var lines = [['Project ID', 'Action', 'Reason', 'Waiting', 'Last wrote', 'Last agent reply', 'State', 'Cluster', 'Cell', 'Stage', 'Days since installation', 'Message type', 'Status', 'Not in Freshchat data'].join(',')];
+  rows.forEach(function (p) { lines.push([p.id, p.act, (p.why || []).map(WHYL).join('; '), p.age == null ? '' : (S.d.ageLabels || [])[p.age], p.last ? dt(p.last) : '', p.reply ? dt(p.reply) : '', p.state === NOSTATE ? '' : p.state, p.cl, p.cell, p.stage, p.inst == null ? '' : p.inst, p.mt, p.st, p.nfc ? 'Yes' : ''].map(q).join(',')); });
   var a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' }));
   a.download = 'ews-project-ids-' + scope().name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.csv';
